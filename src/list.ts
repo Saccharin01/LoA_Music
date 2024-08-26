@@ -31,6 +31,17 @@ const listFilesInBucket = async (bucketName: string) => {
 
     const jsonOutput = JSON.stringify(files, null, 2);
     console.log(jsonOutput);
+
+    // JSON 데이터를 파일로 기록하기 (비동기 방식)
+    const filePath = "./output.json"; // 저장할 파일 경로
+    fs.writeFile(filePath, jsonOutput, (err) => {
+      if (err) {
+        console.error("Error writing file:", err);
+      } else {
+        console.log("File has been saved successfully!");
+      }
+    });
+
     return jsonOutput;
 
   } catch (err) {
