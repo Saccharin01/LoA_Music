@@ -75,28 +75,13 @@ button:hover {
   width: 200px;
   height: 200px;
   margin: 20px auto;
-  background: url('./lp-image.png') no-repeat center center;
+  background: url('./LPImage2.png') no-repeat center center;
   background-size: cover;
   border-radius: 50%;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.5s ease;
   animation: rotate 5s linear infinite;
   animation-play-state: paused;
-}
-
-/* 재생 시 LP 회전 */
-.playing #lp {
-  animation-play-state: running;
-}
-
-/* LP 판 회전 애니메이션 */
-@keyframes rotate {
-  from {
-      transform: rotate(0deg);
-  }
-  to {
-      transform: rotate(360deg);
-  }
 }
 
 /* 트랙 정보 스타일 */
