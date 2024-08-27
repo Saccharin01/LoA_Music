@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>애니메이션 음악 플레이어</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="root">
+      <div id="music-player">
+        <div id="lp"></div>
+  
+        <div id="track-info">
+          <p id="track-title">MusicTitle</p>
+          <p id="time-info">00:00 / 00:00</p>
+        </div>
+  
+        <audio
+          id="audio"
+          src="https://lomusic2.s3.amazonaws.com/Star_Conquer%2CKamen.mp3"
+        ></audio>
+  
+        <div id="controls">
+          <button id="prev-btn">이전</button>
+          <button id="play-btn">재생</button>
+          <button id="next-btn">다음</button>
+        </div>
+  
+        <div id="progVol">
+          <input
+            type="range"
+            title="progress-bar"
+            id="progress-bar"
+            value="0"
+            max="100"
+          />
+          <input
+            type="range"
+            title="volume-bar"
+            id="volume-bar"
+            value="100"
+            max="100"
+          />
+        </div>
+      </div>  
+    </div>
+    
+
+    <script src="script.js"></script>
+  </body>
+</html>
