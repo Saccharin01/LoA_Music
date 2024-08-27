@@ -1,6 +1,7 @@
 /* 기본적인 스타일 */
 #music-player {
-  width: 300px;
+  width: 600px;
+  height: 800px;
   margin: 50px auto;
   text-align: center;
   font-family: 'Arial', sans-serif;
@@ -20,18 +21,18 @@ button {
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  background-color: #4caf50;
+  background-color: #333334;
   color: white;
   cursor: pointer;
+  width: 100px;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: #bea93d;
 }
 
-#progress-bar,
-#volume-bar {
+#progress-bar {
   width: 100%;
   margin-top: 10px;
   appearance: none;
@@ -40,6 +41,18 @@ button:hover {
   background-color: #ddd;
   outline: none;
 }
+#volume-bar {
+  width: 50%;
+  margin-top: 10px;
+  appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  background-color: #ddd;
+  outline: none;
+}
+#progVol{
+  display: flex;
+}
 
 #progress-bar::-webkit-slider-thumb,
 #volume-bar::-webkit-slider-thumb {
@@ -47,14 +60,14 @@ button:hover {
   width: 15px;
   height: 15px;
   border-radius: 50%;
-  background-color: #4caf50;
+  background-color: #333334;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 #progress-bar::-webkit-slider-thumb:hover,
 #volume-bar::-webkit-slider-thumb:hover {
-  background-color: #45a049;
+  background-color: #bea93d;
 }
 
 /* LP 판 스타일 */
