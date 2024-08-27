@@ -25,14 +25,16 @@ function togglePlay() {
 // 재생 시 이벤트
 audio.addEventListener('play', () => {
     isPlaying = true;
-    playBtn.textContent = '일시정지';
+    playBtn.querySelector('i').classList.remove('fa-play');
+    playBtn.querySelector('i').classList.add('fa-pause');
     musicPlayer.classList.add('playing');
 });
 
 // 일시정지 시 이벤트
 audio.addEventListener('pause', () => {
     isPlaying = false;
-    playBtn.textContent = '재생';
+    playBtn.querySelector('i').classList.remove('fa-pause');
+    playBtn.querySelector('i').classList.add('fa-play');
     musicPlayer.classList.remove('playing');
 });
 
