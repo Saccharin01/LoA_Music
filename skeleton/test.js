@@ -3,7 +3,7 @@ const dotenv = require("dotenv")
 
 dotenv.config()
   
-  mongoose.connect(process.env.DATABASE)
+  mongoose.connect(process.env.DATABASE_URL)
   .then(() => {
       const userSchema = new mongoose.Schema({
           _id : String,
