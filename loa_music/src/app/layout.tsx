@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import DragElement from "./components/DragElement";
+import MusicPlayer from "./components/MusicPlayer";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,7 +20,9 @@ export default function RootLayout({
     <html lang="ko">
       <body className="w-screen h-screen">
         <div className="flex h-4/5 justify-between">
-          <main className="w-3/5 bg-indigo-300 m-5">playerComponent will be here</main>
+          <main className="w-3/5 bg-indigo-300 m-5">
+            <MusicPlayer/>
+          </main>
 
           <aside className="flex w-2/5 bg-emerald-200  mr-5 my-5 flex-col justify-between">
             <div className="bg-orange-200 h-4/6">description here</div>

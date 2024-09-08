@@ -25,6 +25,7 @@ export default function DragElement() {
 
   useEffect(()=>{
     const data2 = mongooseData()
+    console.log(data2)
   },[])
 
 

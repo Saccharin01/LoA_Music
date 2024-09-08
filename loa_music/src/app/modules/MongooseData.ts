@@ -18,9 +18,7 @@ const mongooseData = async ()=>{
   } catch (error) {
 
     console.log(`error occur : ${error}`)
-  } finally{
-    await mongoose.disconnect()
-  }
+  } 
 }
 
 export default mongooseData
