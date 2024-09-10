@@ -1,9 +1,9 @@
 const path = require('path')
 
 module.exports = {
-  entry : "./src/reName.ts",
+  entry : "./src/layout.tsx",
   output : {
-    filename : "app.js.bundle.js",
+    filename : "bundle.js",
     path : path.resolve(__dirname, "dist")
   },
   module : {
