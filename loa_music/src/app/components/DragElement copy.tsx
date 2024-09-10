@@ -43,7 +43,9 @@ export default function DragElement() {
       {data.map((element, index) => (
         <div
           key={index}
-          className="min-w-60 m-3 h-40 flex justify-center items-center bg-indigo-400"
+          className="min-w-60 m-3 h-40 flex justify-center items-center bg-indigo-400 cursor-pointer"
+          draggable
+          onDragStart={()=>{console.log("draging!")}}
         >
           {element._id}
         </div>
