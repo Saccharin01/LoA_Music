@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import mongooseData from "../modules/MongooseData"
+// import mongooseData from "../modules/MongooseData"
 
 
 
@@ -23,10 +23,10 @@ export default function DragElement() {
     }
   }, []);
 
-  useEffect(()=>{
-    const data2 = mongooseData()
-    console.log(data2)
-  },[])
+  // useEffect(()=>{
+  //   const data2 = mongooseData()
+  //   console.log(data2)
+  // },[])
 
 
   // todo context provider 생성해야 함
@@ -44,7 +44,9 @@ export default function DragElement() {
       {data.map((element, index) => (
         <div
           key={index}
-          className="min-w-60 m-3 h-40 flex justify-center items-center bg-indigo-400"
+          className="min-w-60 m-3 h-40 flex justify-center items-center bg-indigo-400 transition-transform duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+          onDragStart={(e)=>{console.log(1111)}}
+          draggable
         >
           {element}
         </div>
