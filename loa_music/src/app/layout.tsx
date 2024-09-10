@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import DragElement from "./components/DragElement";
+import DragElement from "./components/DragElement copy";
+import { DataProvider } from "./components/context/useData copy";
 import MusicPlayer from "./components/MusicPlayer";
 import "./globals.css";
 
@@ -31,7 +32,10 @@ export default function RootLayout({
         </div>
 
         <footer className="h-1/5 bg-amber-700 mx-5">
+          <DataProvider>
+            
           <DragElement />
+          </DataProvider>
         </footer>
       </body>
     </html>
