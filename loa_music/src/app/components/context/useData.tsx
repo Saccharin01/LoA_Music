@@ -7,7 +7,7 @@ const DataContext = createContext<string[] | undefined>(undefined);
 
 // 프로바이더 컴포넌트
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [data, setData] = useState<number[]>([]);
+  const [data, setData] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
