@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import DragElement from "./components/DragElement copy";
-import { DataProvider } from "./components/context/useData copy";
+import DragElement from "./components/DragElement";
+import { DataProvider } from "./components/context/useData";
+import { DragDropProvider } from "./components/context/useDragDrop"
 import MusicPlayer from "./components/MusicPlayer";
 import DropBox from "./components/DropBox";
 import "./globals.css";
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className="w-screen h-screen">
         <DataProvider>
+          <DragDropProvider>
           <div className="flex h-4/5 justify-between">
             <main className="w-3/5 bg-indigo-300 m-5">
               <MusicPlayer />
@@ -35,6 +37,7 @@ export default function RootLayout({
           <footer className="h-1/5 bg-amber-700 mx-5">
             <DragElement />
           </footer>
+          </DragDropProvider>
         </DataProvider>
       </body>
     </html>
