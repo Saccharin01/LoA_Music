@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import {useDragDrop} from "./context/useDragDrop"
+import { useDragDrop } from "./context/useDragDrop";
 
 const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -9,7 +9,7 @@ const MusicPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressBarRef = useRef<HTMLInputElement | null>(null);
   const volumeBarRef = useRef<HTMLInputElement | null>(null);
-  const { droppedItem } = useDragDrop()
+  const { droppedItem } = useDragDrop();
 
   useEffect(() => {
     const audioElement = audioRef.current;
@@ -33,6 +33,15 @@ const MusicPlayer: React.FC = () => {
       };
     }
   }, []);
+
+  useEffect(() => {
+    setIsPlaying(false);
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      audioElement.pause();
+      audioElement.currentTime = 0;
+    }
+  }, [droppedItem]);
 
   const handlePlayPause = () => {
     const audioElement = audioRef.current;
@@ -72,22 +81,25 @@ const MusicPlayer: React.FC = () => {
       </div>
 
       <div className="mt-2 text-gray-800 text-sm flex justify-center items-center flex-col">
-        <h3 className="font-black text-base">{droppedItem ? droppedItem._id : "재생중인 음악 없음!"}</h3>
+        <h3 className="font-black text-base">
+          {droppedItem ? droppedItem._id : "재생중인 음악 없음!"}
+        </h3>
         <p className="mt-1 font-mono">
-          {`${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60)
-            .toString()
-            .padStart(2, "0")} / ${Math.floor(duration / 60)}:${Math.floor(
-            duration % 60
-          )
-            .toString()
-            .padStart(2, "0")}`}
+          {`${
+            !isNaN(currentTime) && !isNaN(duration)
+              ? `${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60)
+                  .toString()
+                  .padStart(2, "0")} / ${Math.floor(
+                  duration / 60
+                )}:${Math.floor(duration % 60)
+                  .toString()
+                  .padStart(2, "0")}`
+              : "00:00"
+          }`}
         </p>
       </div>
 
-      <audio
-        ref={audioRef}
-        src={droppedItem?.src}
-      ></audio>
+      <audio ref={audioRef} src={droppedItem?.src}></audio>
 
       <div className="mt-4 px-4">
         <input
@@ -111,10 +123,10 @@ const MusicPlayer: React.FC = () => {
         />
 
         <button
-          className="mx-2 px-4 py-2 text-lg border-none rounded bg-gray-800 text-white cursor-pointer w-[100px] transition-colors duration-300 ease-in-out hover:bg-yellow-500"
+          className="mx-2 px-4 py-2 text-lg border-none rounded bg-gray-800 text-white min-w-[110px] cursor-pointer transition-colors duration-300 ease-in-out hover:bg-yellow-500"
           onClick={handlePlayPause}
         >
-          재생
+          {isPlaying && droppedItem ? "일시정지" : "재생"}
         </button>
       </div>
     </div>
