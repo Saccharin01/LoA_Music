@@ -1,0 +1,15 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "loa_music"
+  ],
+  "scripts": {
+    "start": "npm --prefix loa_music start",
+    "dev": "npm --prefix loa_music run dev",
+    "build": "npm --prefix loa_music run build",
+    "test": "npm --prefix loa_music run test"
+  },
+  "dependencies": {
+  }
+}
