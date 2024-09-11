@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LoA Music</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <div id="music-player">
+        <div id="lp"></div>
+
+        <div id="track-info">
+          <p id="track-title">MusicTitle</p>
+          <p id="time-info">00:00 / 00:00</p>
+        </div>
+
+        <audio
+          id="audio"
+          src="https://lomusic2.s3.amazonaws.com/Star_Conquer%2CKamen.mp3"
+        ></audio>
+
+        <div id="controls">
+          <button id="prev-btn"><i class="fas fa-backward"></i></button>
+          <button id="play-btn"><i class="fas fa-play"></i></button>
+          <button id="next-btn"><i class="fas fa-forward"></i></button>
+        </div>
+
+        <div id="progVol">
+          <input
+            type="range"
+            title="progress-bar"
+            id="progress-bar"
+            value="0"
+            max="100"
+          />
+          <input
+            type="range"
+            title="volume-bar"
+            id="volume-bar"
+            value="100"
+            max="100"
+          />
+        </div>
+
+        <div>
+          <span>
+            hello world!
+          </span>
+        </div>
+      </div>  
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
