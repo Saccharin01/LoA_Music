@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import {useDragDrop} from "./context/useDragDrop"
 
 const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -8,6 +9,7 @@ const MusicPlayer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressBarRef = useRef<HTMLInputElement | null>(null);
   const volumeBarRef = useRef<HTMLInputElement | null>(null);
+  const { droppedItem } = useDragDrop()
 
   useEffect(() => {
     const audioElement = audioRef.current;
@@ -70,7 +72,7 @@ const MusicPlayer: React.FC = () => {
       </div>
 
       <div className="mt-2 text-gray-800 text-sm flex justify-center items-center flex-col">
-        <h3 className="font-black text-base">MusicTitle</h3>
+        <h3 className="font-black text-base">{droppedItem ? droppedItem._id : "재생중인 음악 없음!"}</h3>
         <p className="mt-1 font-mono">
           {`${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60)
             .toString()
@@ -84,7 +86,7 @@ const MusicPlayer: React.FC = () => {
 
       <audio
         ref={audioRef}
-        src="https://lomusic2.s3.amazonaws.com/Star_Conquer%2CKamen.mp3"
+        src={droppedItem?.src}
       ></audio>
 
       <div className="mt-4 px-4">
@@ -103,7 +105,7 @@ const MusicPlayer: React.FC = () => {
           type="range"
           className="w-60 h-[5px] bg-gray-300 rounded-lg appearance-none cursor-pointer ml-4"
           ref={volumeBarRef}
-          defaultValue="100"
+          defaultValue="50"
           max="100"
           onChange={handleVolumeChange}
         />
