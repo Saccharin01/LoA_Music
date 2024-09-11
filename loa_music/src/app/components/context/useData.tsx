@@ -1,23 +1,29 @@
+"use client"
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import mongooseData from '@/app/modules/MongooseData';
 
+interface DataFormat {
+  _id: string;
+  src: string;
+}
 
 // 컨텍스트 생성
-const DataContext = createContext<string[] | undefined>(undefined);
+const DataContext = createContext<DataFormat[] | undefined>(undefined);
 
 // 프로바이더 컴포넌트
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [data, setData] = useState<string[]>([]);
+  const [data, setData] = useState<DataFormat[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const result = await mongooseData();
+        const response = await fetch('/api/musicData');
+        if (!response.ok) throw new Error('Failed to fetch data');
+        const result: DataFormat[] = await response.json();
         setData(result);
       } catch (error) {
-        setError(error as Error);
+        setError((error as Error).message);
       } finally {
         setLoading(false);
       }
@@ -28,7 +34,7 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
 
   return (
     <DataContext.Provider value={data}>
-      {loading ? <div>Loading...</div> : error ? <div>Error: {error.message}</div> : children}
+      {loading ? <div>Loading...</div> : error ? <div>Error: {error}</div> : children}
     </DataContext.Provider>
   );
 };
