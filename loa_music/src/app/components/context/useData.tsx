@@ -1,10 +1,6 @@
 "use client"
 import React, { createContext, useState, useEffect, ReactNode } from 'react';
-
-interface DataFormat {
-  _id: string;
-  src: string;
-}
+import DataFormat from '@/shared/IDataFromat';
 
 // 컨텍스트 생성
 const DataContext = createContext<DataFormat[] | undefined>(undefined);
