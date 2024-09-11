@@ -9,7 +9,7 @@ import DataFormat from "@/shared/IDataFromat";
 export default function DragElement() {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const data = useData();
-  const { setDroppedItem } = useDragDrop();
+  // const { setDroppedItem } = useDragDrop();
 
   useEffect(() => {
     const container = containerRef.current;
@@ -43,18 +43,18 @@ export default function DragElement() {
     event.dataTransfer.setData('application/json', JSON.stringify(item)); // 데이터를 데이터 전송 객체에 저장
   };
 
-  // 드래그 오버 시 호출될 함수
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault(); // 드롭을 허용하기 위해 기본 동작을 방지
-  };
+  // // 드래그 오버 시 호출될 함수
+  // const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+  //   event.preventDefault(); // 드롭을 허용하기 위해 기본 동작을 방지
+  // };
 
-  // 드롭 시 호출될 함수
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    const data = event.dataTransfer.getData('application/json');
-    const item = JSON.parse(data);
-    setDroppedItem(item); // 컨텍스트 프로바이더에 데이터 저장
-  };
+  // // 드롭 시 호출될 함수
+  // const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+  //   event.preventDefault();
+  //   const data = event.dataTransfer.getData('application/json');
+  //   const item = JSON.parse(data);
+  //   setDroppedItem(item); // 컨텍스트 프로바이더에 데이터 저장
+  // };
 
   return (
     <div
