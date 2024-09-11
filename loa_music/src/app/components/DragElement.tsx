@@ -59,7 +59,7 @@ export default function DragElement() {
   return (
     <div
       ref={containerRef}
-      className="w-full h-50 overflow-x-auto flex justify-start items-center transition-all duration-300 ease-in-out"
+      className="w-full h-50 overflow-x-hidden flex justify-start items-center transition-all duration-300 ease-in-out"
     >
       {data.map((element, index) => (
         <div
