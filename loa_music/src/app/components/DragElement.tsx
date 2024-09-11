@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useData } from "./context/useData"; // 커스텀 훅 import
 import mongooseData from "../modules/MongooseData"
-
-
 
 export default function DragElement() {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const data = useData(); // 커스텀 훅 사용
 
   useEffect(() => {
     const container = containerRef.current;
     if (container) {
       const scrollEvent = (event: WheelEvent) => {
         event.preventDefault();
-        container.scrollLeft += event.deltaY
+        container.scrollLeft += event.deltaY;
       };
       container.addEventListener("wheel", scrollEvent);
 
@@ -23,19 +23,18 @@ export default function DragElement() {
     }
   }, []);
 
-  useEffect(()=>{
-    const data2 = mongooseData()
-    console.log(data2)
-  },[])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await mongooseData();
+        console.log(result);
+      } catch (error) {
+        console.error("Failed to fetch data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-
-  // todo context provider 생성해야 함
-  // todo axios 혹은 fetch로 데이터베이스에 정보 조회 가능해야 함. spa + 장난감이기 때문에 서버 안 만들거임
-  // todo 데이터베이스에 정보 조회를 위해 mongoose 설치 해야 할 것 같음.
-  
-
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 0,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1];
- 
   return (
     <div
       ref={containerRef}
@@ -44,9 +43,11 @@ export default function DragElement() {
       {data.map((element, index) => (
         <div
           key={index}
-          className="min-w-60 m-3 h-40 flex justify-center items-center bg-indigo-400"
+          className="min-w-60 m-3 h-40 flex justify-center items-center bg-indigo-400 cursor-pointer"
+          draggable
+          onDragStart={()=>{console.log("draging!")}}
         >
-          {element}
+          {element._id}
         </div>
       ))}
     </div>
