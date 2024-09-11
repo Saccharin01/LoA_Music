@@ -30,8 +30,7 @@ export default function DropBox() {
       className="flex justify-center items-center border-4 border-dashed w-2/3 h-2/3 rounded-2xl"
       onDrop={handleDrop} // 드롭 핸들러 설정
       onDragOver={handleDragOver} // 드래그 오버 핸들러 설정
-    >{droppedItem?._id}
-      Drag Here!
+    >{droppedItem?._id ? droppedItem?._id : "Drop Here!"}
     </div>
   );
 }
