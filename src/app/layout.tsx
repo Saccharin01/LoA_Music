@@ -18,7 +18,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="w-[99vw] h-[99vh]">
+      <body className="w-full h-full *:">
+        <div className="w-[99vw] h-[99vh]">
         <DataProvider>
           <DragDropProvider>
           <div className="flex h-4/5 justify-between">
@@ -39,6 +40,8 @@ export default function RootLayout({
           </footer>
           </DragDropProvider>
         </DataProvider>
+
+        </div>
       </body>
     </html>
   );
