@@ -26,17 +26,17 @@ export default function DragElement() {
     }
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const result = await mongooseData();
-        console.log(result);
-      } catch (error) {
-        console.error("Failed to fetch data:", error);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const result = await mongooseData();
+  //       console.log(result);
+  //     } catch (error) {
+  //       console.error("Failed to fetch data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   // 드래그 시작 시 호출될 함수
   const handleDragStart = (event: React.DragEvent<HTMLDivElement>, item: DataFormat) => {
