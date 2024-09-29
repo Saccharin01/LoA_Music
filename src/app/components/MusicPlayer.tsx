@@ -86,7 +86,7 @@ const MusicPlayer: React.FC = () => {
         </h3>
         <p className="mt-1 font-mono">
           {`${
-            !isNaN(currentTime) && !isNaN(duration)
+            droppedItem && !isNaN(currentTime) && !isNaN(duration)
               ? `${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60)
                   .toString()
                   .padStart(2, "0")} / ${Math.floor(
@@ -94,7 +94,7 @@ const MusicPlayer: React.FC = () => {
                 )}:${Math.floor(duration % 60)
                   .toString()
                   .padStart(2, "0")}`
-              : "00:00"
+              : "0:00 / 0:00"
           }`}
         </p>
       </div>
@@ -106,11 +106,12 @@ const MusicPlayer: React.FC = () => {
           type="range"
           className="w-full h-[5px] bg-gray-300 rounded-lg appearance-none cursor-pointer"
           ref={progressBarRef}
-          defaultValue="0"
+          value={currentTime && duration ? (currentTime / duration) * 100 : 0} // currentTime과 duration의 비율로 설정
           max="100"
           onChange={handleProgressChange}
         />
       </div>
+
 
       <div className="mt-4 flex justify-evenly items-center">
         <input
