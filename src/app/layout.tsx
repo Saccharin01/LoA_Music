@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import DragElement from "./components/DragElement";
 import { DataProvider } from "./components/context/useData";
-import { DragDropProvider } from "./components/context/useDragDrop"
-import MusicPlayer from "./components/MusicPlayer";
-import DropBox from "./components/DropBox";
+import { DragDropProvider } from "./components/context/useDragDrop";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
   title: "LoA Music",
@@ -18,30 +16,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="w-full h-full *:">
-        <div className="w-[99vw] h-[99vh]">
+      <body className="bg-[#282c2c]">
         <DataProvider>
           <DragDropProvider>
-          <div className="flex h-4/5 justify-between">
-            <main className="w-3/5 bg-indigo-300 m-5">
-              <MusicPlayer />
-            </main>
-
-            <aside className="flex w-2/5 bg-emerald-200  mr-5 my-5 flex-col justify-between">
-              <div className="bg-orange-200 h-4/6">description here</div>
-              <div className="bg-orange-500 h-56 flex justify-center items-center">
-                <DropBox />
-              </div>
-            </aside>
-          </div>
-
-          <footer className="bg-slate-300">
-            <DragElement />
-          </footer>
+            <header className="absolute w-full top-0 left-0 z-[1] h-16">
+              <Navbar />
+            </header>
+            <div className="mt-16">
+              {children}
+            </div>
           </DragDropProvider>
         </DataProvider>
-
-        </div>
       </body>
     </html>
   );

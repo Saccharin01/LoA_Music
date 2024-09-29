@@ -6,6 +6,7 @@ const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(20); // 볼륨 상태 추가
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressBarRef = useRef<HTMLInputElement | null>(null);
   const volumeBarRef = useRef<HTMLInputElement | null>(null);
@@ -14,6 +15,7 @@ const MusicPlayer: React.FC = () => {
   useEffect(() => {
     const audioElement = audioRef.current;
     if (audioElement) {
+      audioElement.volume = volume / 100; // 초기 볼륨 설정
       const updateTime = () => {
         setCurrentTime(audioElement.currentTime);
         setDuration(audioElement.duration);
@@ -32,7 +34,7 @@ const MusicPlayer: React.FC = () => {
         audioElement.removeEventListener("loadedmetadata", updateTime);
       };
     }
-  }, []);
+  }, [volume]); // 볼륨이 변경될 때마다 적용
 
   useEffect(() => {
     setIsPlaying(false);
@@ -64,14 +66,15 @@ const MusicPlayer: React.FC = () => {
   };
 
   const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const audioElement = audioRef.current;
-    if (audioElement) {
-      audioElement.volume = parseFloat(event.target.value) / 100;
+    const newVolume = parseFloat(event.target.value);
+    setVolume(newVolume); // 볼륨 상태 업데이트
+    if (audioRef.current) {
+      audioRef.current.volume = newVolume / 100; // 오디오 요소의 볼륨 설정
     }
   };
 
   return (
-    <div className="flex flex-col h-full justify-evenly">
+    <div className="flex flex-col h-full justify-evenly bg-[#9e9e9e] bg-opacity-50 m-[10px]"> 
       <div className="w-[200px] h-[200px] mx-auto my-5 bg-center bg-cover rounded-full shadow-md transition-transform duration-500 ease-linear">
         <img
           src="https://lomusic2.s3.ap-northeast-2.amazonaws.com/LPImage2.png"
@@ -86,7 +89,7 @@ const MusicPlayer: React.FC = () => {
         </h3>
         <p className="mt-1 font-mono">
           {`${
-            !isNaN(currentTime) && !isNaN(duration)
+            droppedItem && !isNaN(currentTime) && !isNaN(duration)
               ? `${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60)
                   .toString()
                   .padStart(2, "0")} / ${Math.floor(
@@ -94,7 +97,7 @@ const MusicPlayer: React.FC = () => {
                 )}:${Math.floor(duration % 60)
                   .toString()
                   .padStart(2, "0")}`
-              : "00:00"
+              : "0:00 / 0:00"
           }`}
         </p>
       </div>
@@ -106,7 +109,7 @@ const MusicPlayer: React.FC = () => {
           type="range"
           className="w-full h-[5px] bg-gray-300 rounded-lg appearance-none cursor-pointer"
           ref={progressBarRef}
-          defaultValue="0"
+          value={currentTime && duration ? (currentTime / duration) * 100 : 0}
           max="100"
           onChange={handleProgressChange}
         />
@@ -117,7 +120,7 @@ const MusicPlayer: React.FC = () => {
           type="range"
           className="w-60 h-[5px] bg-gray-300 rounded-lg appearance-none cursor-pointer ml-4"
           ref={volumeBarRef}
-          defaultValue="50"
+          value={volume} // 상태로 관리되는 볼륨 값 사용
           max="100"
           onChange={handleVolumeChange}
         />
