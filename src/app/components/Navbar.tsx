@@ -15,12 +15,12 @@ export default function Navbar() {
   return (
     <>
       <nav>
-        <div className="w-screen fixed z-50 bg-[#282c2c]">
+        <div className="w-screen fixed z-50 bg-[#3e3e3f]">
           <div className="flex justify-between h-16 px-10 shadow items-cente">
             <div className="flex items-center space-x-1">
               <div>
                 <Link href="/" className="">
-                  <h1 className="text-xl lg:text-2xl font-bold cursor-pointer mr-3 border-cyan-300 text-slate-200 hover:text-yellow-500">
+                  <h1 className="text-xl lg:text-2xl font-bold cursor-pointer mr-3 border-cyan-300 text-slate-200 ">
                     LoA Music
                   </h1>
                 </Link>
