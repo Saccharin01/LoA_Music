@@ -6,24 +6,19 @@ const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
   const [duration, setDuration] = useState<number>(0);
-  const [volume, setVolume] = useState<number>(20); // 볼륨 상태 추가
+  const [volume, setVolume] = useState<number>(20);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const progressBarRef = useRef<HTMLInputElement | null>(null);
+  const progressBarRef = useRef<HTMLDivElement | null>(null);
   const volumeBarRef = useRef<HTMLInputElement | null>(null);
   const { droppedItem } = useDragDrop();
 
   useEffect(() => {
     const audioElement = audioRef.current;
     if (audioElement) {
-      audioElement.volume = volume / 100; // 초기 볼륨 설정
+      audioElement.volume = volume / 100;
       const updateTime = () => {
         setCurrentTime(audioElement.currentTime);
         setDuration(audioElement.duration);
-        if (progressBarRef.current) {
-          progressBarRef.current.value = `${
-            (audioElement.currentTime / audioElement.duration) * 100
-          }`;
-        }
       };
 
       audioElement.addEventListener("timeupdate", updateTime);
@@ -34,7 +29,7 @@ const MusicPlayer: React.FC = () => {
         audioElement.removeEventListener("loadedmetadata", updateTime);
       };
     }
-  }, [volume]); // 볼륨이 변경될 때마다 적용
+  }, [volume]);
 
   useEffect(() => {
     setIsPlaying(false);
@@ -57,24 +52,64 @@ const MusicPlayer: React.FC = () => {
     }
   };
 
-  const handleProgressChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const audioElement = audioRef.current;
-    if (audioElement) {
-      audioElement.currentTime =
-        (parseFloat(event.target.value) / 100) * audioElement.duration;
+  const handleProgressDrag = (event: React.MouseEvent | MouseEvent) => {
+    if (progressBarRef.current) {
+      const rect = progressBarRef.current.getBoundingClientRect();
+      const newLeft = Math.max(0, Math.min(event.clientX - rect.left, rect.width));
+      const newProgress = (newLeft / rect.width) * duration;
+
+      if (audioRef.current) {
+        audioRef.current.currentTime = newProgress;
+        setCurrentTime(newProgress);
+      }
     }
+  };
+
+  const startProgressDrag = (event: React.MouseEvent) => {
+    handleProgressDrag(event);
+
+    const mouseMoveHandler = (event: MouseEvent) => {
+      handleProgressDrag(event);
+    };
+
+    document.addEventListener("mousemove", mouseMoveHandler);
+    document.addEventListener("mouseup", () => {
+      document.removeEventListener("mousemove", mouseMoveHandler);
+    });
   };
 
   const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newVolume = parseFloat(event.target.value);
-    setVolume(newVolume); // 볼륨 상태 업데이트
+    setVolume(newVolume);
     if (audioRef.current) {
-      audioRef.current.volume = newVolume / 100; // 오디오 요소의 볼륨 설정
+      audioRef.current.volume = newVolume / 100;
     }
   };
 
+  const startDragButton = (event: React.MouseEvent) => {
+    event.preventDefault();
+    const mouseMoveHandler = (event: MouseEvent) => {
+      if (progressBarRef.current) {
+        const rect = progressBarRef.current.getBoundingClientRect();
+        const newLeft = Math.max(0, Math.min(event.clientX - rect.left, rect.width));
+        const newProgress = (newLeft / rect.width) * duration;
+
+        if (audioRef.current) {
+          audioRef.current.currentTime = newProgress;
+          setCurrentTime(newProgress);
+        }
+      }
+    };
+
+    document.addEventListener("mousemove", mouseMoveHandler);
+    document.addEventListener("mouseup", () => {
+      document.removeEventListener("mousemove", mouseMoveHandler);
+    });
+  };
+
   return (
-    <div className="flex flex-col h-full justify-evenly bg-[#9e9e9e] bg-opacity-50 m-[10px]"> 
+    <div className="flex flex-col h-full justify-between bg-[#9e9e9e] bg-opacity-40 p-5 rounded-lg shadow-lg m-5">
+      {/* Album Image Section */}
       <div className="w-[200px] h-[200px] mx-auto my-5 bg-center bg-cover rounded-full shadow-md transition-transform duration-500 ease-linear">
         <img
           src="https://lomusic2.s3.ap-northeast-2.amazonaws.com/LPImage2.png"
@@ -83,50 +118,60 @@ const MusicPlayer: React.FC = () => {
         />
       </div>
 
-      <div className="mt-2 text-gray-800 text-sm flex justify-center items-center flex-col">
-        <h3 className="font-black text-base">
+      {/* Track Info Section */}
+      <div className="text-center my-4">
+        <h3 className="font-bold text-lg text-gray-800">
           {droppedItem ? droppedItem._id : "재생중인 음악 없음!"}
         </h3>
-        <p className="mt-1 font-mono">
-          {`${
-            droppedItem && !isNaN(currentTime) && !isNaN(duration)
-              ? `${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60)
-                  .toString()
-                  .padStart(2, "0")} / ${Math.floor(
-                  duration / 60
-                )}:${Math.floor(duration % 60)
-                  .toString()
-                  .padStart(2, "0")}`
-              : "0:00 / 0:00"
-          }`}
+        <p className="mt-1 text-sm text-gray-700">
+          {droppedItem && !isNaN(currentTime) && !isNaN(duration)
+            ? `${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60)
+                .toString()
+                .padStart(2, "0")} / ${Math.floor(duration / 60)}:${Math.floor(
+                duration % 60
+              )
+                .toString()
+                .padStart(2, "0")}`
+            : "0:00 / 0:00"}
         </p>
       </div>
 
+      {/* Audio Player */}
       <audio ref={audioRef} src={droppedItem?.src}></audio>
 
-      <div className="mt-4 px-4">
-        <input
-          type="range"
-          className="w-full h-[5px] bg-gray-300 rounded-lg appearance-none cursor-pointer"
-          ref={progressBarRef}
-          value={currentTime && duration ? (currentTime / duration) * 100 : 0}
-          max="100"
-          onChange={handleProgressChange}
-        />
+      {/* Progress Bar Section */}
+      <div className="mt-2 px-4" ref={progressBarRef} onMouseDown={startProgressDrag}>
+        <div className="w-full h-[10px] bg-gray-300 rounded-lg relative overflow-hidden cursor-pointer">
+          <div
+            className="h-full bg-red-500 absolute top-0 left-0"
+            style={{ width: `${(currentTime / duration) * 100}%` }}
+          ></div>
+
+          {/* Draggable Button */}
+          <div
+            className="w-4 h-4 bg-white border border-gray-400 rounded-full absolute top-1/2 transform -translate-y-1/2 cursor-pointer transition-transform duration-300"
+            style={{ left: `${(currentTime / duration) * 100}%` }}
+            onMouseDown={startDragButton}
+          ></div>
+        </div>
       </div>
 
-      <div className="mt-4 flex justify-evenly items-center">
-        <input
-          type="range"
-          className="w-60 h-[5px] bg-gray-300 rounded-lg appearance-none cursor-pointer ml-4"
-          ref={volumeBarRef}
-          value={volume} // 상태로 관리되는 볼륨 값 사용
-          max="100"
-          onChange={handleVolumeChange}
-        />
+      {/* Volume and Control Section */}
+      <div className="mt-4 flex justify-between items-center">
+        <div className="flex flex-col items-center w-1/2">
+          <input
+            type="range"
+            className="w-full h-[5px] bg-gray-300 rounded-lg appearance-none cursor-pointer"
+            ref={volumeBarRef}
+            value={volume}
+            max="100"
+            onChange={handleVolumeChange}
+          />
+          <span className="text-xs text-gray-800 mt-1">Volume: {volume}%</span>
+        </div>
 
         <button
-          className="mx-2 px-4 py-2 text-lg border-none rounded bg-gray-800 text-white min-w-[110px] cursor-pointer transition-colors duration-300 ease-in-out hover:bg-yellow-500"
+          className="px-4 py-2 text-lg border-none rounded bg-gray-800 text-white min-w-[110px] cursor-pointer transition-colors duration-300 ease-in-out hover:bg-yellow-500"
           onClick={handlePlayPause}
         >
           {isPlaying && droppedItem ? "일시정지" : "재생"}
