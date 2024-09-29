@@ -3,3 +3,8 @@ export default interface DataFormat {
   src: string;
   img: string;
 }
+
+export interface Description{
+  headLine : string,
+  mainScript : string
+}
