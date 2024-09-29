@@ -30,7 +30,7 @@ export default function RootLayout({
                 <main className="w-3/5 bg-indigo-300 m-5">
                   <MusicPlayer />
                 </main>
-                <aside className="flex w-2/5 bg-emerald-200  my-5 flex-col justify-between">
+                <aside className="flex w-2/5 my-5 flex-col justify-between">
                   <div className="bg-orange-200 h-4/6">description here</div>
                   <div className="bg-orange-500 h-56 flex justify-center items-center">
                     <DropBox />
