@@ -11,20 +11,20 @@ export default function DragElement() {
   const data = useData();
   // const { setDroppedItem } = useDragDrop();
 
-  useEffect(() => {
-    const container = containerRef.current;
-    if (container) {
-      const scrollEvent = (event: WheelEvent) => {
-        event.preventDefault();
-        container.scrollLeft += event.deltaY;
-      };
-      container.addEventListener("wheel", scrollEvent);
+  // useEffect(() => {
+  //   const container = containerRef.current;
+  //   if (container) {
+  //     const scrollEvent = (event: WheelEvent) => {
+  //       event.preventDefault();
+  //       container.scrollLeft += event.deltaY;
+  //     };
+  //     container.addEventListener("wheel", scrollEvent);
 
-      return () => {
-        container.removeEventListener("wheel", scrollEvent);
-      };
-    }
-  }, []);
+  //     return () => {
+  //       container.removeEventListener("wheel", scrollEvent);
+  //     };
+  //   }
+  // }, []);
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -59,7 +59,7 @@ export default function DragElement() {
   return (
     <div
       ref={containerRef}
-      className="w-full h-50 overflow-hidden flex justify-start items-cen ter transition-all duration-300 ease-in-out"
+      className="w-full h-full overflow-x-auto flex justify-start items-center transition-all duration-300 ease-in-out"
     >
       {data.map((element, index) => (
         <div
