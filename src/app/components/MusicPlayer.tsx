@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useRef, useEffect } from "react";
 import { useDragDrop } from "./context/useDragDrop";
 
@@ -74,7 +74,7 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-full justify-evenly">
+    <div className="flex flex-col h-full justify-evenly bg-[#9e9e9e] bg-opacity-50 m-[10px]"> 
       <div className="w-[200px] h-[200px] mx-auto my-5 bg-center bg-cover rounded-full shadow-md transition-transform duration-500 ease-linear">
         <img
           src="https://lomusic2.s3.ap-northeast-2.amazonaws.com/LPImage2.png"
