@@ -120,10 +120,10 @@ const MusicPlayer: React.FC = () => {
 
       {/* Track Info Section */}
       <div className="text-center my-4">
-        <h3 className="font-bold text-lg text-gray-800">
+        <h3 className="font-bold text-lg text-black">
           {droppedItem ? droppedItem._id : "재생중인 음악 없음!"}
         </h3>
-        <p className="mt-1 text-sm text-gray-700">
+        <p className="mt-1 text-sm text-black">
           {droppedItem && !isNaN(currentTime) && !isNaN(duration)
             ? `${Math.floor(currentTime / 60)}:${Math.floor(currentTime % 60)
                 .toString()
