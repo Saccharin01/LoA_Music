@@ -2,15 +2,19 @@ import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import MusicData from './model/mongooseModel';
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
+    const url = new URL(request.url);
+    const genre = url.searchParams.get('genre');
+
     // 데이터베이스 연결
     if (mongoose.connection.readyState !== 1) {
       await mongoose.connect(process.env.DATABASE_URL as string);
     }
 
-    // 데이터 조회
-    const data = await MusicData.find({});
+    const query = {genre : genre}
+    console.log(query)
+    const data = await MusicData.find(query);
 
     return NextResponse.json(data);
   } catch (error) {
