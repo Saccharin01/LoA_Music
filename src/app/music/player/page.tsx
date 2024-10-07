@@ -5,9 +5,9 @@ import Description from "../../components/Description"
 
 export default function MsuicPage() {
   return (
-    <div className="w-[99vw] h-[93vh] relative">
-      <div className="flex h-[75%] justify-between mt-16 ">
-        <main className="w-3/5">
+    <div className="w-[99vw] h-[95vh] relative">
+      <div className="flex h-[60%] justify-between mt-16 ">
+        <main className="w-3/5 flex justify-center items-center">
           <MusicPlayer />
         </main>
         <aside className="flex w-2/5 my-5 flex-col justify-between">
@@ -19,7 +19,7 @@ export default function MsuicPage() {
           </div>
         </aside>
       </div>
-      <footer className=" h-[25%] ml-5">
+      <footer className=" h-[40%] ml-5">
         <DragElement />
       </footer>
     </div>
