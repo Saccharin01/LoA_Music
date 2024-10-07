@@ -108,7 +108,7 @@ const MusicPlayer: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-4/5 min-h-[95%] justify-between bg-[#9e9e9e] bg-opacity-40 p-5 rounded-lg shadow-lg m-5">
+    <div className="flex flex-col h-4/5 min-h-[95%]  w-[70%] justify-between bg-[#9e9e9e] bg-opacity-40 p-5 rounded-lg shadow-lg m-5">
       {/* Album Image Section */}
       <div className="w-[200px] h-[200px] mx-auto my-5 bg-center bg-cover rounded-full shadow-md transition-transform duration-500 ease-linear">
         <img
