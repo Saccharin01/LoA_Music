@@ -1,40 +1,37 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useData } from "./context/useData"; // 커스텀 훅 import
+import { useRef } from "react";
+import { useData } from "./context/useData";
 import DataFormat from "@/shared/IDataFromat";
-import Image from "next/image";
+
 export default function DragElement() {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const data = useData();
+  const { data } = useData();
 
-  // 드래그 시작 시 호출될 함수
   const handleDragStart = (
     event: React.DragEvent<HTMLDivElement>,
     item: DataFormat
   ) => {
-    event.dataTransfer.setData("application/json", JSON.stringify(item)); // 데이터를 데이터 전송 객체에 저장
+    event.dataTransfer.setData("application/json", JSON.stringify(item));
   };
 
   return (
     <div
       ref={containerRef}
-      className="w-full h-full overflow-x-auto flex justify-start items-center transition-all duration-300 ease-in-out"
+      className="w-full h-full overflow-x-auto flex flex-col justify-start items-center"
     >
-      {data.map((element, index) => (
-        <div
-          key={index}
-          className="min-w-60 m-3 h-40 flex justify-center items-center bg-indigo-400 cursor-pointer"
-          draggable
-          onDragStart={(event) => handleDragStart(event, element)} // 드래그 시작 핸들러 설정
-        >
-          <img
-            src={element.img}
-            alt={element._id}
-            className="w-full h-full"
-          />
-        </div>
-      ))}
+      <div className="overflow-x-auto flex flex-wrap m-3 p-3 border border-gray-200 bg-gray-100 justify-around">
+        {data.map((element, index) => (
+          <div
+            key={index}
+            className="min-w-60 m-2 h-40 flex justify-center items-center bg-indigo-400 cursor-pointer"
+            draggable
+            onDragStart={(event) => handleDragStart(event, element)}
+          >
+            <img src={element.img} alt={element._id} className="w-full h-full" />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
