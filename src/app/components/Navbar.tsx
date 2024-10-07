@@ -34,6 +34,12 @@ export default function Navbar() {
                   player
                 </Link> 
                 <Link
+                  href="/music/request"
+                  className="hover:text-yellow-500 text-slate-200 font-bold"
+                >
+                  Request
+                </Link>
+                <Link
                   href="/music/about"
                   className="hover:text-yellow-500 text-slate-200 font-bold"
                 >
