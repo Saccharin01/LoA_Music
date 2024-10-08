@@ -15,7 +15,7 @@ const GenreNav: React.FC = () => {
 
     try {
       console.log("장르 네브 트라이 블록")
-      const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/musicData?genre=${genre}`);;
+      const response = await fetch(`/api/musicData?genre=${genre}`);
       if (!response.ok) throw new Error('Failed to fetch genre data');
       const data = await response.json();
       setData(data); // 데이터 업데이트
