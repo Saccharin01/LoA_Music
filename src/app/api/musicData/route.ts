@@ -2,28 +2,42 @@ import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
 import MusicData from './model/mongooseModel';
 
-// 이 라우트는 동적으로 처리되어야 함을 명시
-export const dynamic = 'force-dynamic';
+// export const dynamic = 'force-dynamic';
+
+async function connectDB() {
+  try {
+    if (mongoose.connection.readyState === 1) {
+      return; // 이미 연결된 상태
+    }
+    
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL is not defined');
+    }
+
+    await mongoose.connect(process.env.DATABASE_URL);
+    console.log('Database connected successfully');
+  } catch (error) {
+    console.error('Database connection error:', error);
+    throw error;
+  }
+}
 
 export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
     const genre = url.searchParams.get('genre');
+    
+    await connectDB();
 
-    // 데이터베이스 연결
-    if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect(process.env.DATABASE_URL as string);
-    }
-
-    const query = {genre : genre}
+    const query = {genre : genre};
     const data = await MusicData.find(query);
 
     return NextResponse.json(data);
   } catch (error) {
-    console.error(error)
+    console.error('Request error:', error);
     return NextResponse.json({
-       error: 'Error fetching data',
-      errorObj : error
+      error: 'Error fetching data',
+      details: error instanceof Error ? error.message : 'Unknown error'
     }, { status: 500 });
   }
 }
