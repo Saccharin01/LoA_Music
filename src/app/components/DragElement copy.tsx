@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useData } from "./context/useData";
-import DataFormat from "@/shared/IDataFormat";
+import DataFormat from "@/shared/IDataFromat";
 
 export default function DragElement() {
   const { data, loading } = useData();
