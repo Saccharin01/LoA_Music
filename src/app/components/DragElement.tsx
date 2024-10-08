@@ -20,7 +20,7 @@ export default function DragElement() {
       ref={containerRef}
       className="w-full h-full overflow-x-auto flex flex-col justify-start items-center"
     >
-      <div className="overflow-x-auto flex flex-wrap m-3 p-3 border border-gray-200 bg-gray-100 justify-around">
+      <div className="overflow-x-auto flex flex-wrap m-3 p-3 justify-around">
         {data.map((element, index) => (
           <div
             key={index}
