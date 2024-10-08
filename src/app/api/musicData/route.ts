@@ -4,6 +4,7 @@ import MusicData from './model/mongooseModel';
 
 export async function GET(request: Request) {
   try {
+    console.log("트라이 블록으로 들어왔어!!!!!!!!!!!!!!!!!")
     const url = new URL(request.url);
     const genre = url.searchParams.get('genre');
 
