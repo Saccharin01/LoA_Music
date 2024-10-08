@@ -1,16 +1,9 @@
 import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
-// import MusicData from './model/mongooseModel';
+import MusicData from './model/mongooseModel';
+import dotenv from "dotenv"
 
-
-const schema = new mongoose.Schema({
-  _id: String,
-  src: String,
-});
-
-const MusicData = mongoose.models.MusicData || mongoose.model('MusicData', schema, 'MusicData');
-
-
+dotenv.config()
 
 
 export async function GET(request: Request) {
@@ -22,7 +15,7 @@ export async function GET(request: Request) {
 
     // 데이터베이스 연결
     if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect('mongodb+srv://chousik01:1q2w3e4r@cluster.lv77n.mongodb.net/LoAmusic?retryWrites=true&w=majority');
+      await mongoose.connect(process.env.DATABASE_URL!);
     }
 
     const query = {genre : genre}
