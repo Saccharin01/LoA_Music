@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useData } from "./context/useData";
-import DataFormat from "@/shared/IDataFromat";
+import DataFormat from "@/shared/IDataFormat";
 
 export default function DragElement() {
   const { data, loading } = useData();
@@ -28,7 +28,7 @@ export default function DragElement() {
               src={element.img}
               alt={element._id}
               className="h-full"
-              width={300} // 이미지의 가로 크기 설정
+              width={320} // 이미지의 가로 크기 설정
               height={160} // 이미지의 세로 크기 설정
               loading="lazy"
             />

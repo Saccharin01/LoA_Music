@@ -12,6 +12,9 @@ export default function DropBox() {
     }
   }, [droppedItem]); // droppedItem이 변경될 때마다 useEffect 실행
 
+  useEffect(() => {
+    setDroppedItem(null);
+  }, [setDroppedItem]);
   // 드래그 오버 시 호출될 함수
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault(); // 드롭을 허용하기 위해 기본 동작을 방지
@@ -21,8 +24,10 @@ export default function DropBox() {
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const data = event.dataTransfer.getData("application/json");
-    const item = JSON.parse(data);
-    setDroppedItem(item); // 컨텍스트 프로바이더에 데이터 저장
+    if (data) {
+      const parsedData = JSON.parse(data);
+      setDroppedItem(parsedData); // 컨텍스트 프로바이더에 데이터 저장
+    }
   };
 
   return (

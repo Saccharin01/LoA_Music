@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { DataProvider } from "../components/context/useData";
 import { DragDropProvider } from "../components/context/useDragDrop";
-import "../globals.css"
+import "./music.css"
 import Navbar from "../components/Navbar";
 
 export const metadata: Metadata = {

@@ -7,8 +7,7 @@ export default function Home() {
   const router = useRouter();
 
   const RedirectMainPage = () => {
-    router.push("/"); // 상위 경로로 이동
-    window.location.reload(); // 페이지 강제 새로고침
+    router.push("/");
   };
 
   return (
