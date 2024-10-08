@@ -20,7 +20,10 @@ export async function GET(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
-    return NextResponse.json({ error: 'Error fetching data' }, { status: 500 });
+    return NextResponse.json({
+       error: 'Error fetching data',
+      errorObj : error
+    }, { status: 500 });
   } finally {
     // 데이터베이스 연결 종료
     if (mongoose.connection.readyState === 1) {
