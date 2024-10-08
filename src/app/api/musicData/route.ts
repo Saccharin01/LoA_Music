@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 import MusicData from './model/mongooseModel';
 
 export async function GET(request: Request) {
+  console.dir(request)
   try {
     console.log("트라이 블록으로 들어왔어!!!!!!!!!!!!!!!!!")
     const url = new URL(request.url);
