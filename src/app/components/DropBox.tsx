@@ -12,6 +12,10 @@ export default function DropBox() {
     }
   }, [droppedItem]); // droppedItem이 변경될 때마다 useEffect 실행
 
+
+  useEffect(()=>{
+    setDroppedItem(null)
+  },[])
   // 드래그 오버 시 호출될 함수
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault(); // 드롭을 허용하기 위해 기본 동작을 방지
