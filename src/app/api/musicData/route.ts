@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server';
 import mongoose from 'mongoose';
-import MusicData from './model/mongooseModel';
+// import MusicData from './model/mongooseModel';
+
+
+const schema = new mongoose.Schema({
+  _id: String,
+  src: String,
+});
+
+const MusicData = mongoose.models.MusicData || mongoose.model('MusicData', schema, 'MusicData');
+
+
+
 
 export async function GET(request: Request) {
   console.dir(request)
@@ -11,7 +22,7 @@ export async function GET(request: Request) {
 
     // 데이터베이스 연결
     if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect(process.env.DATABASE_URL as string);
+      await mongoose.connect('mongodb+srv://chousik01:1q2w3e4r@cluster.lv77n.mongodb.net/LoAmusic?retryWrites=true&w=majority');
     }
 
     const query = {genre : genre}
@@ -20,14 +31,12 @@ export async function GET(request: Request) {
 
     return NextResponse.json(data);
   } catch (error) {
+    console.error(error)
+
+
     return NextResponse.json({
        error: 'Error fetching data',
       errorObj : error
     }, { status: 500 });
-  } finally {
-    // 데이터베이스 연결 종료
-    if (mongoose.connection.readyState === 1) {
-      await mongoose.disconnect();
-    }
   }
 }
