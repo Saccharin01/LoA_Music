@@ -14,7 +14,6 @@ const GenreNav: React.FC = () => {
     setFetchError(null);
 
     try {
-      console.log("장르 네브 트라이 블록")
       const response = await fetch(`/api/musicData?genre=${genre}`);
       if (!response.ok) throw new Error('Failed to fetch genre data');
       const data = await response.json();
