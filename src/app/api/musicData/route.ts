@@ -9,11 +9,9 @@ export async function GET(request: Request) {
   try {
     const url = new URL(request.url);
     const genre = url.searchParams.get('genre');
-
-    // 데이터베이스 연결
-    if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect(process.env.DATABASE_URL as string);
-    }
+    
+    await mongoose.connect(process.env.DATABASE_URL as string);
+    console.log(process.env.DATABASE_URL)
 
     const query = {genre : genre}
     const data = await MusicData.find(query);
