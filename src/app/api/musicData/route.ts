@@ -4,7 +4,7 @@ import MusicData from './model/mongooseModel';
 import dotenv from "dotenv"
 
 dotenv.config()
-
+console.log(process.env.DATABASE_URL)
 
 export async function GET(request: Request) {
   console.dir(request)
@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
     // 데이터베이스 연결
     if (mongoose.connection.readyState !== 1) {
-      await mongoose.connect(process.env.DATABASE_URL!);
+      await mongoose.connect(process.env.DATABASE_URL as string);
     }
 
     const query = {genre : genre}
