@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { useDragDrop } from "./context/useDragDrop";
-
+import Image from "next/image";
 const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [currentTime, setCurrentTime] = useState<number>(0);
@@ -111,10 +111,12 @@ const MusicPlayer: React.FC = () => {
     <div className="flex flex-col h-4/5 min-h-[95%]  w-[70%] justify-between bg-[#9e9e9e] bg-opacity-40 p-5 rounded-lg shadow-lg m-5">
       {/* Album Image Section */}
       <div className="w-[200px] h-[200px] mx-auto my-5 bg-center bg-cover rounded-full shadow-md transition-transform duration-500 ease-linear">
-        <img
-          src="https://lomusic2.s3.ap-northeast-2.amazonaws.com/LPImage2.png"
-          alt="LP"
-          className="w-full h-full object-cover rounded-full"
+        <Image
+        src="https://lomusic2.s3.ap-northeast-2.amazonaws.com/LPImage2.webp"
+        alt="LP image"
+        width={200}
+        height={200}
+        className="w-full h-full object-cover rounded-full"
         />
       </div>
 

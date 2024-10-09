@@ -21,7 +21,7 @@ export default function RootLayout({
           <header className="absolute w-full top-0 left-0 z-[1] h-16">
             <Navbar />
           </header>
-          <div className="mt-16">{children}</div>
+          <div className="mt-16 w-[99vw] h-[95vh]">{children}</div>
         </DragDropProvider>
       </DataProvider>
     </div>
