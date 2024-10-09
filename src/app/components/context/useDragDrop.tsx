@@ -1,20 +1,22 @@
-"use client"
-import React, { createContext, useState, useContext, ReactNode } from 'react';
-import DataFormat from '@/shared/IDataFromat';
+"use client";
+import React, { createContext, useState, useContext, ReactNode } from "react";
+import { IMusicDataFormat } from "@/shared/IDataFromat";
 
 interface DragDropContextType {
-  droppedItem : DataFormat | null
-  setDroppedItem: (items: DataFormat | null) => void
+  droppedItem: IMusicDataFormat | null;
+  setDroppedItem: (items: IMusicDataFormat | null) => void;
 }
 
-const DragDropContext = createContext<DragDropContextType | undefined>(undefined);
+const DragDropContext = createContext<DragDropContextType | undefined>(
+  undefined
+);
 
 interface DragDropProviderProps {
   children: ReactNode;
 }
 
 function DragDropProvider({ children }: DragDropProviderProps) {
-  const [droppedItem, setDroppedItem] = useState<DataFormat | null>(null);
+  const [droppedItem, setDroppedItem] = useState<IMusicDataFormat | null>(null);
 
   return (
     <DragDropContext.Provider value={{ droppedItem, setDroppedItem }}>
@@ -26,7 +28,7 @@ function DragDropProvider({ children }: DragDropProviderProps) {
 function useDragDrop() {
   const context = useContext(DragDropContext);
   if (context === undefined) {
-    throw new Error('useDragDrop must be used within a DragDropProvider');
+    throw new Error("useDragDrop must be used within a DragDropProvider");
   }
   return context;
 }
