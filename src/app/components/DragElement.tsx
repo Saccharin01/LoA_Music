@@ -1,14 +1,14 @@
 "use client";
 import Image from "next/image";
 import { useData } from "./context/useData";
-import DataFormat from "@/shared/IDataFromat";
+import { IMusicDataFormat } from "@/shared/IDataFromat";
 
 export default function DragElement() {
   const { data, loading } = useData();
 
   const handleDragStart = (
     event: React.DragEvent<HTMLDivElement>,
-    item: DataFormat
+    item: IMusicDataFormat
   ) => {
     if (event.target instanceof HTMLImageElement)
       event.dataTransfer.setData("application/json", JSON.stringify(item));
@@ -28,8 +28,8 @@ export default function DragElement() {
               src={element.img}
               alt={element._id}
               className="h-full"
-              width={300} // 이미지의 가로 크기 설정
-              height={160} // 이미지의 세로 크기 설정
+              width={300}
+              height={160}
               loading="lazy"
             />
           </div>

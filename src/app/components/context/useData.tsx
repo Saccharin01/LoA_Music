@@ -1,20 +1,20 @@
 "use client";
-import React, { createContext, useState, useContext, ReactNode } from 'react';
-import DataFormat from '@/shared/IDataFromat';
-// 컨텍스트 타입 정의
+import React, { createContext, useState, useContext, ReactNode } from "react";
+import { IMusicDataFormat } from "@/shared/IDataFromat";
+
 interface DataContextType {
-  data: DataFormat[];
-  setData: (data: DataFormat[]) => void;
+  data: IMusicDataFormat[];
+  setData: (data: IMusicDataFormat[]) => void;
   loading: boolean;
   error: string | null;
 }
 
-// 초기값 설정
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-// 프로바이더 컴포넌트
-export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [data, setData] = useState<DataFormat[]>([]);
+export const DataProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [data, setData] = useState<IMusicDataFormat[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -25,11 +25,10 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   );
 };
 
-// 커스텀 훅
 export const useData = () => {
   const context = useContext(DataContext);
   if (context === undefined) {
-    throw new Error('useData must be used within a DataProvider');
+    throw new Error("useData must be used within a DataProvider");
   }
   return context;
 };
