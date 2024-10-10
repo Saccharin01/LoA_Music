@@ -7,7 +7,7 @@ import { getDate, numberdId, validateRequestData } from "../modules/RequestForma
 import MailNotification from "../modules/MailNotification";
 
 let Memo = 0; 
-const REQUEST_THRESHOLD = 50; 
+const REQUEST_THRESHOLD = 10; 
 
 export async function POST(request: Request) {
   try {
