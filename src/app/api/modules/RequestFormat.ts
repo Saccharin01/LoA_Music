@@ -24,14 +24,12 @@ export function numberdId(doc: Document): string {
 }
 
 
-export function validateRequestData(requestData: string): boolean {
+export function validateRequestData(requestData: string): void {
   if (!validator.isLength(requestData, { min: 1, max: 100 })) {
-    return false;
+    throw new Error('글자 수는 100글자를 넘어가면 안됩니다.');
   }
 
   if (validator.contains(requestData, '<') || validator.contains(requestData, '>')) {
-    return false;
+    throw new Error('허용되지 않은 특수문자가 포함되어 있습니다.');
   }
-
-  return true; 
 }
