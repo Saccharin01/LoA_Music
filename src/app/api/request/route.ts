@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     const numericCurrentId = parseInt(newId.split(".")[1], 10);
     const idDifference = numericCurrentId - Memo;
 
-    if (idDifference == REQUEST_THRESHOLD) {
+    if (idDifference >= REQUEST_THRESHOLD) {
       MailNotification(idDifference).catch((error : Error) => {
         console.error("Error sending email:", error);
       });
