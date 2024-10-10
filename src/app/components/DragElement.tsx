@@ -3,14 +3,14 @@ import React, { useMemo, useCallback } from "react";
 import { useData } from "./context/useData";
 import ImageItem from "./memo/ImageItem";
 import { IMusicDataFormat } from "@/shared/IDataFromat";
-
+import mime from "mime"
 export default function DragElement() {
   const { data, loading } = useData();
 
   const handleDragStart = useCallback(
     (event: React.DragEvent<HTMLDivElement>, item: IMusicDataFormat) => {
       if (event.target instanceof HTMLImageElement)
-        event.dataTransfer.setData("application/json", JSON.stringify(item));
+        event.dataTransfer.setData(mime.getType("json")!, JSON.stringify(item));
     },
     []
   );
