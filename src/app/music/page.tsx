@@ -6,9 +6,7 @@ import Link from "next/link";
 export default function Home() {
   const router = useRouter();
 
-  const RedirectMainPage = () => {
-    router.push("/");
-  };
+
 
   return (
     <div className="relative flex items-center justify-center min-h-[94vh] bg-[#1a1a1a] text-[#ffffff]">

@@ -20,7 +20,7 @@ export default function Navbar() {
                   </h1>
                 </Link>
               </div>
-              <div className="hidden lg:flex justify-around space-x-4 gap-10">
+              <div className="lg:flex justify-around space-x-4 gap-10">
                 {/* <Link
                   href="/"
                   className="hover:text-yellow-500 text-slate-200 pl-10 font-bold"

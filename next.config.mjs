@@ -1,10 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // remotePatterns: [
-    //   "lomusic2.s3.amazonaws.com",
-    //   "lomusic2.s3.ap-northeast-2.amazonaws.com",
-    // ],
     remotePatterns: [
       {
         protocol: "https",
@@ -20,6 +16,8 @@ const nextConfig = {
   },
   env: {
     DATABASE_URL: process.env.DATABASE_URL,
+    EMAIL_USER: process.env.EMAIL_USER,
+    EMAIL_PASS: process.env.EMAIL_PASS,
   },
 };
 

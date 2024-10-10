@@ -1,15 +1,13 @@
 import { Document } from "mongoose";
 
-interface Description {
-  headLine: string;
-  mainScript: string;
-}
-
 export interface IMusicDataFormat {
   _id: string;
   src: string;
   img: string;
-  description: Description;
+  description: {
+    headLine: string;
+    mainScript: string;
+  };
   genre: string;
 }
 
