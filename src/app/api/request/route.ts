@@ -10,11 +10,12 @@ import MailNotification from "../modules/MailNotification";
 
 let Memo = 0; 
 const REQUEST_THRESHOLD = 10; 
+console.log(process.env.EMAIL_USER)
+console.log(process.env.EMAIL_PASS)
 
 export async function POST(request: Request) {
 
-  console.log(process.env.EMAIL_USER)
-  console.log(process.env.EMAIL_PASS)
+
   try {
     await connectDB(); 
     if (Memo === 0) {
@@ -51,7 +52,7 @@ export async function POST(request: Request) {
         console.error("Error sending email:", error);
       });
       // todo 배포 전에 실행 시킬 것 !!!! 
-      // Memo = numericCurrentId;
+      Memo = numericCurrentId;
     }
 
     return NextResponse.json(
