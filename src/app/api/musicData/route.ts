@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextResponse } from "next/server";
 import { MusicData } from "../model/mongooseModel";
 import connectDB from "../modules/ConnectDB";
