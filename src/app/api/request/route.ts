@@ -10,6 +10,9 @@ let Memo = 0;
 const REQUEST_THRESHOLD = 50; 
 
 export async function POST(request: Request) {
+
+  console.log(process.env.EMAIL_USER)
+  console.log(process.env.EMAIL_PASS)
   try {
     await connectDB(); 
     if (Memo === 0) {
