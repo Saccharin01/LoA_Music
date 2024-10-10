@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextResponse } from "next/server";
 import { initializeLatestId } from "../modules/initializeLatestId";
 import connectDB from "../modules/ConnectDB";
@@ -7,7 +9,9 @@ import { getDate, numberdId, validateRequestData } from "../modules/RequestForma
 import MailNotification from "../modules/MailNotification";
 
 let Memo = 0; 
-const REQUEST_THRESHOLD = 50; 
+const REQUEST_THRESHOLD = 30;
+console.log(process.env.EMAIL_USER)
+console.log(process.env.EMAIL_PASS)
 
 export async function POST(request: Request) {
   try {
