@@ -46,7 +46,7 @@ export async function POST(request: Request) {
         console.error("Error sending email:", error);
       });
       // todo 배포 전에 실행 시킬 것 !!!! 
-      // Memo = numericCurrentId;
+      Memo = numericCurrentId;
     }
 
     return NextResponse.json(
