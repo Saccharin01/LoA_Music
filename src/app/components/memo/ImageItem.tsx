@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { IMusicDataFormat } from "@/shared/IDataFromat";
+import { IMusicDataFormat } from "@/shared/IDataFormat";
 
 interface ImageItemProps {
   element: IMusicDataFormat;

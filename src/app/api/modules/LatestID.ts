@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { IRequestDataFormatServer } from "@/shared/IDataFromat";
+import { IRequestDataFormatServer } from "@/shared/IDataFormat";
 
 export async function LatestID(model: Model<IRequestDataFormatServer>): Promise<number> {
   try {

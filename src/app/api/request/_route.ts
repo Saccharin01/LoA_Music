@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { LatestID } from "../modules/LatestID";
 import connectDB from "../modules/ConnectDB";
 import { RequestLog } from "../model/mongooseModel";
-import { IRequestDataFormat } from "@/shared/IDataFromat";
+import { IRequestDataFormat } from "@/shared/IDataFormat";
 import { getDate, numberdId, validateRequestData } from "../modules/RequestFormat";
 import MailNotification from "../modules/MailNotification";
 

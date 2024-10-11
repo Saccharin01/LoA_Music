@@ -1,5 +1,5 @@
 import mongoose, { Schema, models } from "mongoose";
-import { IMusicDataFormatServer, IRequestDataFormatServer, IMailTimestempServer} from "@/shared/IDataFromat";
+import { IMusicDataFormatServer, IRequestDataFormatServer, IMailTimestempServer} from "@/shared/IDataFormat";
 
 /**
  * NoSQL에서 사용하는 스키마와 모델을 정의하는 파일입니다.

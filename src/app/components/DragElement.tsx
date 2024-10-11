@@ -2,7 +2,7 @@
 import React, { useMemo, useCallback } from "react";
 import { useData } from "./context/useData";
 import ImageItem from "./memo/ImageItem";
-import { IMusicDataFormat } from "@/shared/IDataFromat";
+import { IMusicDataFormat } from "@/shared/IDataFormat";
 import mime from "mime"
 export default function DragElement() {
   const { data, loading } = useData();

@@ -1,7 +1,7 @@
 import connectDB from "./ConnectDB";
 import { LatestID } from "./LatestID";
 import { Model } from "mongoose";
-import { IRequestDataFormatServer, IMailTimestempServer, IMailTimestemp } from "@/shared/IDataFromat";
+import { IRequestDataFormatServer, IMailTimestempServer, IMailTimestemp } from "@/shared/IDataFormat";
 import { LRUCache } from "@/shared/LRU.Class";
 
 export async function InitalizeServerENV(

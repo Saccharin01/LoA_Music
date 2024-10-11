@@ -1,5 +1,5 @@
 import { LRUCache } from "@/shared/LRU.Class";
-import { IMailTimestemp } from "@/shared/IDataFromat";
+import { IMailTimestemp } from "@/shared/IDataFormat";
 
 declare global {
   var Memo: number; 
