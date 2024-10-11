@@ -24,3 +24,13 @@ export interface IRequestDataFormat {
 export interface IRequestDataFormatServer extends IRequestDataFormat, Document {
   _id: string;
 }
+
+export interface IMailTimestemp{
+  _id : string;
+  sentTime : Date;
+  status : string
+}
+
+export interface IMailTimestempServer extends IMailTimestemp, Document{
+  _id : string;
+}

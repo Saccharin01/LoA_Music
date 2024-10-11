@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useState, useContext, ReactNode } from "react";
-import { IMusicDataFormat } from "@/shared/IDataFromat";
+import { IMusicDataFormat } from "@/shared/IDataFormat";
 
 interface DataContextType {
   data: IMusicDataFormat[];
