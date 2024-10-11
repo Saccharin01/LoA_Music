@@ -1,7 +1,7 @@
 import { Model } from "mongoose";
 import { IRequestDataFormatServer } from "@/shared/IDataFromat";
 
-export async function initializeLatestId(model: Model<IRequestDataFormatServer>): Promise<number> {
+export async function LatestID(model: Model<IRequestDataFormatServer>): Promise<number> {
   try {
     const lastRequest = await model.findOne().sort({ _id: -1 }).exec();
     const latestId = lastRequest ? parseInt(lastRequest._id.split('.')[1], 10) : 0;
