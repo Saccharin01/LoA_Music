@@ -1,5 +1,5 @@
 import mongoose, { Schema, models } from "mongoose";
-import { IMusicDataFormatServer, IRequestDataFormatServer, IMailTimestempServer} from "@/shared/IDataFormat";
+import { IMusicDataFormatServer, IRequestDataFormatServer, IMailTimestempServer } from "@/shared/IDataFormat";
 
 /**
  * NoSQL에서 사용하는 스키마와 모델을 정의하는 파일입니다.
@@ -16,20 +16,20 @@ const musicSchema: Schema<IMusicDataFormatServer> = new Schema({
   },
 });
 
-const requestSchema : Schema<IRequestDataFormatServer> = new Schema({
-  _id : String,
-  requestLog : String,
-  date : String
-})
+const requestSchema: Schema<IRequestDataFormatServer> = new Schema({
+  _id: String,
+  requestLog: String,
+  date: String,
+});
 
-const mailSchema : Schema<IMailTimestempServer> = new Schema({
-  _id : String,
-  sentTime : Date,
-  status : String
-})
+const mailSchema: Schema<IMailTimestempServer> = new Schema({
+  _id: String,
+  sentTime: Date,
+  status: String,
+});
 
-const MusicData = models.MusicData||mongoose.model<IMusicDataFormatServer>("MusicData", musicSchema, "MusicData");
-const RequestLog = models.request||mongoose.model<IRequestDataFormatServer>("request", requestSchema, "request");
-const MailTimestemp = models.MailTimestemp||mongoose.model<IMailTimestempServer>("mailTimestemp", mailSchema, "mailTimestemp");
+const MusicData = models.MusicData || mongoose.model<IMusicDataFormatServer>("MusicData", musicSchema, "MusicData");
+const RequestLog = models.RequestLog || mongoose.model<IRequestDataFormatServer>("RequestLog", requestSchema, "RequestLog");
+const MailTimestemp = models.MailTimestemp || mongoose.model<IMailTimestempServer>("MailTimestemp", mailSchema, "MailTimestemp");
 
 export { MusicData, RequestLog, MailTimestemp };
