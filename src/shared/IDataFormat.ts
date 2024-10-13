@@ -16,21 +16,21 @@ export interface IMusicDataFormatServer extends IMusicDataFormat, Document {
 }
 
 export interface IRequestDataFormat {
-  _id: string;
+  id: string;
   requestLog: string;
   date: string;
 }
 
 export interface IRequestDataFormatServer extends IRequestDataFormat, Document {
-  _id: string;
+  id: string;
 }
 
 export interface IMailTimestemp{
-  _id : string;
+  id : string;
   sentTime : Date;
   status : string
 }
 
 export interface IMailTimestempServer extends IMailTimestemp, Document{
-  _id : string;
+  id : string;
 }
