@@ -26,7 +26,7 @@ export async function MailController(emailType: string): Promise<void> {
   await sendMailNotification(emailType);
 
   // 캐시 갱신
-  cache.set(emailType, { _id: "uniqueId", sentTime: new Date(), status: "sent" });
+  cache.set(emailType, { id: "uniqueId", sentTime: new Date(), status: "sent" });
 }
 
 // 최근 메일 전송 이벤트를 데이터베이스에서 가져오는 함수

@@ -22,11 +22,11 @@ export async function POST(request: Request) {
     const body: IRequestDataFormat = await request.json();
     validateRequestData(body.requestLog); // 요청 데이터 검증
 
-    const lastRequest = await RequestLog.findOne().sort({ _id: -1 }).exec();
+    const lastRequest = await RequestLog.findOne().sort({ id: -1 }).exec();
     const newId = numberdId(lastRequest);
 
     const newRequestLog = new RequestLog({
-      _id: newId,
+      id: newId,
       requestLog: body.requestLog,
       date: getDate(new Date()),
     });
@@ -86,12 +86,12 @@ async function processMailVerification(newId: string) {
           await MailNotification(idDifference);
 
           // 캐시 갱신
-          globalThis.cache.set("lastEmailEvent", { _id: "uniqueId", sentTime: new Date(), status: "sent" });
+          globalThis.cache.set("lastEmailEvent", { id: "uniqueId", sentTime: new Date(), status: "sent" });
 
-          const MailLogID = await MailTimestemp.findOne().sort({ _id: -1 }).exec();
+          const MailLogID = await MailTimestemp.findOne().sort({ id: -1 }).exec();
           await LogMailEvent(
             {
-              _id: numberdId(MailLogID),
+              id: numberdId(MailLogID),
               sentTime: new Date(),
               status: "sent",
             },
