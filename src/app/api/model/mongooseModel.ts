@@ -17,13 +17,13 @@ const musicSchema: Schema<IMusicDataFormatServer> = new Schema({
 });
 
 const requestSchema: Schema<IRequestDataFormatServer> = new Schema({
-  _id: String,
+  id: String,
   requestLog: String,
   date: String,
 });
 
 const mailSchema: Schema<IMailTimestempServer> = new Schema({
-  _id: String,
+  id: String,
   sentTime: Date,
   status: String,
 });
