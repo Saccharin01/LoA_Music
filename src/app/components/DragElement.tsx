@@ -1,7 +1,7 @@
 "use client";
 import React, { useMemo, useCallback } from "react";
 import { useData } from "./context/useData";
-import ImageItem from "./memo/ImageItem";
+import ImageItem from "./memo/useMemo.Image";
 import { IMusicDataFormat } from "@/shared/IDataFormat";
 import mime from "mime"
 export default function DragElement() {
