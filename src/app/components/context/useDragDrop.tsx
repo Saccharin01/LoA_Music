@@ -1,21 +1,11 @@
 "use client";
 import React, { createContext, useState, useContext, ReactNode } from "react";
 import { IMusicDataFormat } from "@/shared/IDataFormat";
+import { DragDropContextType } from "../interface/useDragDrop.interface"
 
-interface DragDropContextType {
-  droppedItem: IMusicDataFormat | null;
-  setDroppedItem: (items: IMusicDataFormat | null) => void;
-}
+const DragDropContext = createContext<DragDropContextType | undefined>(undefined);
 
-const DragDropContext = createContext<DragDropContextType | undefined>(
-  undefined
-);
-
-interface DragDropProviderProps {
-  children: ReactNode;
-}
-
-function DragDropProvider({ children }: DragDropProviderProps) {
+function DragDropProvider ({ children }: {children : ReactNode}) {
   const [droppedItem, setDroppedItem] = useState<IMusicDataFormat | null>(null);
 
   return (
