@@ -1,11 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { IMusicDataFormat } from "@/shared/IDataFormat";
-
-interface ImageItemProps {
-  element: IMusicDataFormat;
-  handleDragStart: (event: React.DragEvent<HTMLDivElement>, item: IMusicDataFormat) => void;
-}
+import {ImageItemProps} from "../interface/useMemo.interface"
 
 const ImageItem: React.FC<ImageItemProps> = ({ element, handleDragStart }) => {
   return (
