@@ -30,7 +30,7 @@ export default function DragElement() {
   if (!loading) {
     return (
     <div className="w-full h-full overflow-x-hidden hide-scrollbar">
-      <div className="grid grid-cols-5 gap-2 place-items-center overflow-auto">
+      <div className="grid grid-cols-5 gap-2 place-items-center overflow-auto bg-[#9e9e9e] bg-opacity-20">
         {imageList}
       </div>
     </div>
