@@ -1,62 +1,46 @@
 "use client";
 import { useRef } from "react";
-import validator from "validator";
+import Validate from "./modules/Validate";
 
 export default function RequestPage() {
   const requestLogRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = async () => {
-    const requestLog = requestLogRef.current?.value.trim() || "";
+  
+  const handleSubmit = () => {
+    Validate(requestLogRef, "/api/request");
+  };
 
-    if (!validator.isLength(requestLog, { min: 1, max: 100 })) {
-      alert("입력값은 1자 이상 100자 이하여야 합니다.");
-      return;
-    }
-
-    if (
-      validator.contains(requestLog, "<") ||
-      validator.contains(requestLog, ">")
-    ) {
-      alert("입력 값에 허용되지 않는 문자열이 존재합니다.");
-      return;
-    }
-
-    try {
-      const response = await fetch("/api/request", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ requestLog, date: new Date() }),
-      });
-
-      if (response.ok) {
-        alert("요청이 성공적으로 전송되었습니다.");
-        if (requestLogRef.current) {
-          requestLogRef.current.value = "";
-        }
-      } else {
-        alert("요청 전송에 실패했습니다.");
-      }
-    } catch (error) {
-      console.error("Error sending request:", error);
-      alert("요청 전송 중 오류가 발생했습니다.");
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      handleSubmit(); 
     }
   };
 
   return (
     <div className="w-full h-full">
-      <div>
-        <input
-          ref={requestLogRef}
-          name="requestLog"
-          placeholder="요청사항입니다"
-          type="text"
-        />
-      </div>
-      <div>
-        <button onClick={handleSubmit}>요청 전송</button>
+      <div className="p-40">
+        <div className="bg-[#9e9e9e] bg-opacity-35">
+        <div>
+          <input
+            ref={requestLogRef}
+            name="requestLog"
+            placeholder="요청사항입니다"
+            type="text"
+            onKeyDown={handleKeyDown}
+            className="w-[29rem]"
+          />
+        </div>
+        <div>
+          <button
+            onClick={handleSubmit}
+            className="border-2 border-solid border-gray-500 hover:border-white hover:text-white mt-20"
+          >
+            요청 전송
+          </button>
+        </div>
+
+        </div>
       </div>
     </div>
   );
-}
+}  

@@ -14,8 +14,8 @@ export function getDate(date: Date): string {
 
 
 export function numberdId(doc: Document): string {
-  const lastNumber = doc && doc._id 
-    ? parseInt(doc._id.toString().split(".")[1]) 
+  const lastNumber = doc && doc.id 
+    ? parseInt(doc.id.toString().split(".")[1]) 
     : 0;
   const newNumber = lastNumber + 1;
   const newId = `No.${newNumber.toString().padStart(4, "0")}`; 

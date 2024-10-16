@@ -1,6 +1,5 @@
 import nodemailer, { Transporter } from 'nodemailer';
 
-
 export default async function MailNotification(requestCount: number): Promise<void> {
   const transporter: Transporter = nodemailer.createTransport({
     service: 'gmail',

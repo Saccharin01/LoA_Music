@@ -1,8 +1,8 @@
 "use client";
-import React, { useState } from 'react';
-import { useData } from './context/useData';
+import React, { useState } from "react";
+import { useData } from "./context/useData";
 
-const genres = ['commander', 'orb', 'island', 'abyss'];
+const genres = ["commander", "adventure", "orb", "island", "abyss"];
 
 const GenreNav: React.FC = () => {
   const { setData, loading, error } = useData(); // useData 훅에서 setData 가져오기
@@ -15,7 +15,7 @@ const GenreNav: React.FC = () => {
 
     try {
       const response = await fetch(`/api/musicData?genre=${genre}`);
-      if (!response.ok) throw new Error('Failed to fetch genre data');
+      if (!response.ok) throw new Error("Failed to fetch genre data");
       const data = await response.json();
       setData(data); // 데이터 업데이트
     } catch (error) {
