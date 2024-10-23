@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import ProjectElement from "./mainPageComponent/ProjectElement";
+import ProjectElement from "./components/ProjectElement";
 
 export default function MainPage() {
   return (

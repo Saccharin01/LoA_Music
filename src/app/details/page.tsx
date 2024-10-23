@@ -1,6 +1,6 @@
 "use client"
 
-import { useLiteral } from "../mainPageComponent/context/useLiteral";
+import { useLiteral } from "../components/context/useLiteral";
 import Image from "next/image";
 import Link from "next/link";
 
