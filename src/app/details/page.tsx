@@ -12,11 +12,14 @@ export default function DetailsPage() {
     return <div>No details available</div>;
   }
 
-  const selectedProject = literal[0];
+  const selectedProject = literal[0]
+  const innerObj = literal[0].details
+
 
   return (
     <div>
       <h1>{selectedProject.title}</h1>
+      <h1>{innerObj.introduce}</h1>
       <Image
         src={selectedProject.img}
         alt="이미지입니닥!"
@@ -25,6 +28,14 @@ export default function DetailsPage() {
         style={{ width: "auto", height: "auto" }}
         priority
       />
+      {innerObj.about.map((data, index)=> 
+        <Link
+        key={index}
+        href={data.link}
+        >{data.placeholder}</Link>        
+        )}
+
+
       <p>{selectedProject.description}</p>
       <p>{selectedProject.details.introduce}</p>
       <Link

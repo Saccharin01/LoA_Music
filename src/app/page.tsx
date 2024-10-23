@@ -21,7 +21,7 @@ export default function MainPage() {
               Music
             </Link>
           </div>
-          <div className="flex-shrink-0 w-[300px]">
+          <div className="">
             <ProjectElement /> 
           </div>
         </div>
