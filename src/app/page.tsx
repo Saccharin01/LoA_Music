@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-
+import ProjectElement from "./mainPageComponent/ProjectElement";
 
 export default function MainPage() {
   return (
@@ -18,9 +18,7 @@ export default function MainPage() {
           <div>
             <Link href="/music">music</Link>
           </div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
+          <ProjectElement/>
         </div>
       </div>
     </>
