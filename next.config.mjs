@@ -12,6 +12,11 @@ const nextConfig = {
         hostname: "lomusic2.s3.ap-northeast-2.amazonaws.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "saccharinportfolio.s3.ap-northeast-2.amazonaws.com",
+        pathname: "/**",
+      },
     ],
   },
   env: {

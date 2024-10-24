@@ -23,7 +23,7 @@ export async function POST(request: Request) {
           Memo = latestId;
         })
         .catch((error : Error) => {
-          console.error("최신 _id 초기화 오류:", error);
+          console.error("최신 id 초기화 오류:", error);
         });
     }
     
@@ -32,11 +32,11 @@ export async function POST(request: Request) {
     validateRequestData(body.requestLog);
 
 
-    const lastRequest = await RequestLog.findOne().sort({ _id: -1 }).exec();
+    const lastRequest = await RequestLog.findOne().sort({ id: -1 }).exec();
     const newId = numberdId(lastRequest);
 
     const newRequestLog = new RequestLog({
-      _id: newId,
+      id: newId,
       requestLog: body.requestLog,
       date: getDate(new Date()),
     });

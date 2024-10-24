@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { StaticProvider } from "./components/context/useLiteral";
 
 export const metadata: Metadata = {
   title: "조우식",
@@ -18,11 +19,13 @@ export default function RootLayout({
       <head>
         <meta name="robots" content="index, follow" /> 
       </head>
-      <body>
-        <div>
-          {children}
-        </div>
-      </body>
+      <StaticProvider>
+        <body>
+          <div className="bg-[#fff6eb] w-full h-full flex justify-center items-center flex-col">
+            {children}
+          </div>
+        </body>
+      </StaticProvider>
     </html>
   );
 }

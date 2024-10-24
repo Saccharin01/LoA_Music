@@ -11,8 +11,8 @@ export async function InitalizeServerENV(
   try {
     await connectDB();
     const newestID = await LatestID(requestModel);
-    globalThis.Memo = newestID;  // 서버 기동 시 최신 요청 로그의 _id 값을 초기화
-    console.log(`Newest Doc's _id value : ${newestID}`);
+    globalThis.Memo = newestID;  // 서버 기동 시 최신 요청 로그의 id 값을 초기화
+    console.log(`Newest Doc's id value : ${newestID}`);
 
     if (!globalThis.cache) {
       globalThis.cache = new LRUCache<string, IMailTimestemp>(10); 
