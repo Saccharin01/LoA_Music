@@ -30,12 +30,7 @@ export default function DetailsPage() {
 
         <ButtonGroup aboutProps={innerObj.about} />
 
-        <Link
-          href="/"
-          className="ml-auto bg-gray-500 text-white py-2 px-4 rounded-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
-        >
-          뒤로가기
-        </Link>
+
 
         <div className="flex justify-center my-4">
           <Image
