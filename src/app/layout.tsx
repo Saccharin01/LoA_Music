@@ -21,7 +21,7 @@ export default function RootLayout({
       </head>
       <StaticProvider>
         <body>
-          <div>
+          <div className="bg-[#fff6eb] w-full h-full flex justify-center items-center flex-col">
             {children}
           </div>
         </body>
