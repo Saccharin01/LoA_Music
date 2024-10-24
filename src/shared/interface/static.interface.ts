@@ -11,6 +11,7 @@ export interface IstaticData {
   img : string
   details: {
     introduce: string;
+    params: string;
     about: about[]
   };
 }
