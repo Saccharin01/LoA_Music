@@ -55,7 +55,7 @@ export const staticData: IstaticData[] = [
     },
   },
   {
-    title: "Hackerton Challenge",
+    title: "hackathon Challenge",
     description:
       "KDT 해커톤 참여를 위해 자료 조사 및 서류 작업 준비, 그리고 참여 신청까지 했지만 아쉽게도 본선에 진입하지 못한 프로젝트",
     stack: ["notion"],
