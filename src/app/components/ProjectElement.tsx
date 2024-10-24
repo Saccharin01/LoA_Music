@@ -1,5 +1,5 @@
 import { useLiteral } from "./context/useLiteral";
-import { IstaticData } from "@/shared/static.interface";
+import { IstaticData } from "@/app/components/interface/static.interface";
 import { staticData } from "@/shared/static.data";
 import Image from "next/image";
 import Link from "next/link";

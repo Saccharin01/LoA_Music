@@ -1,4 +1,4 @@
-import { IstaticData } from "./static.interface";
+import { IstaticData } from "../app/components/interface/static.interface";
 
 export const staticData: IstaticData[] = [
   {
