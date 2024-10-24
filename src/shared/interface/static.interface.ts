@@ -1,7 +1,11 @@
-
 interface about {
   placeholder : string,
   link : string 
+}
+
+export interface Usage {
+  title : string;
+  params : string[]
 }
 
 export interface IstaticData {
