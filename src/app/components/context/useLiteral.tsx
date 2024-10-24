@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useState, useContext, ReactNode } from "react";
-import { IstaticData } from "@/app/components/interface/static.interface";
+import { IstaticData } from "@/shared/interface/static.interface";
 import { staticData } from "@/shared/static.data"; // 정적 데이터 가져오기
 
 // 컨텍스트 생성
