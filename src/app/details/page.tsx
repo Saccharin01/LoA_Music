@@ -17,7 +17,7 @@ export default function DetailsPage() {
   const innerObj = selectedProject.details;
 
   return (
-    <div className="h-[100vh]">
+    <div>
       <div className="pt-12">
         <h1 className="text-3xl font-bold mb-4">{selectedProject.title}</h1>
 
