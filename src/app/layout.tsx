@@ -21,7 +21,7 @@ export default function RootLayout({
       <StaticProvider>
         <body>
           <div>
-            <div className="bg-[#979999] w-full min-h-screen px-2 lg:px-80">
+            <div className="bg-[#C5C1C184] w-full min-h-screen px-2 lg:px-80">
               {children}
             </div>
           </div>
