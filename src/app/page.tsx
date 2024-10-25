@@ -25,13 +25,9 @@ export default function Home() {
             좋겠습니다.
           </p>
         </div>
-        <div className="w-1/3 flex justify-between">
+        <div className="w-1/3 flex justify-center">
           <button className="p-2 bg-[#4d4d4d] hover:bg-[#666666] text-[#ffffff] rounded-md">
-            <Link href="/music/player">바로가기</Link>
-          </button>
-
-          <button className="p-2 bg-[#4d4d4d] hover:bg-[#666666] text-[#ffffff] rounded-md">
-            <Link href="/">메인 화면</Link>
+            <Link href="/player">바로가기</Link>
           </button>
         </div>
       </div>
