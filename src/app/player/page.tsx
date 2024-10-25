@@ -1,7 +1,7 @@
-import DragElement from "../../components/DragElement";
-import DropBox from "../../components/DropBox";
-import MusicPlayer from "../../components/MusicPlayer";
-import Description from "../../components/Description"
+import DragElement from "../components/DragElement";
+import DropBox from "../components/DropBox";
+import MusicPlayer from "../components/MusicPlayer";
+import Description from "../components/Description"
 
 export default function MsuicPage() {
   return (
