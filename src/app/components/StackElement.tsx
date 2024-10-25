@@ -2,13 +2,12 @@ import { StackUsage } from "@/shared/static.usage";
 
 export default function StackElement() {
   return (
-    <div className="h-[70vh]">
-  
+    <>
       <div>
         <h2 className="text-2xl font-bold mb-6">What I Used</h2>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 py-6">
         {StackUsage.map((category, index) => (
           <div key={index}>
             <h3 className="text-lg font-semibold">{category.title}</h3>
@@ -22,8 +21,6 @@ export default function StackElement() {
           </div>
         ))}
       </div>
-
-
-    </div>
+    </>
   );
 }
