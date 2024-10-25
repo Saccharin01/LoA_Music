@@ -39,12 +39,6 @@ export default function Navbar() {
                 >
                   Request
                 </Link>
-                <Link
-                  href="/about"
-                  className="hover:text-yellow-500 text-slate-200 font-bold"
-                >
-                  About
-                </Link>
               </div>
             </div>
           </div>
