@@ -26,6 +26,10 @@ export const staticData: IstaticData[] = [
           link: "https://saccharin01.github.io/Good-Start/",
         },
       ],
+      sampleImg: [
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/GoodStart/good_start1.webp",
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/GoodStart/good_start2.webp",
+      ],
     },
   },
   {
@@ -52,10 +56,14 @@ export const staticData: IstaticData[] = [
           link: "https://www.saccharin01.com/music",
         },
       ],
+      sampleImg: [
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon1.webp",
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon2.webp",
+      ],
     },
   },
   {
-    title: "Hackerton Challenge",
+    title: "hackathon Challenge",
     description:
       "KDT 해커톤 참여를 위해 자료 조사 및 서류 작업 준비, 그리고 참여 신청까지 했지만 아쉽게도 본선에 진입하지 못한 프로젝트",
     stack: ["notion"],
@@ -67,8 +75,12 @@ export const staticData: IstaticData[] = [
       about: [
         {
           placeholder: "notion",
-          link: "",
+          link: "https://kongukjae.notion.site/962c28d2a75f4d3e9da7379fba87a637?pvs=74",
         },
+      ],
+      sampleImg: [
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon1.webp",
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon2.webp",
       ],
     },
   },
@@ -88,6 +100,10 @@ export const staticData: IstaticData[] = [
           link: "",
         },
       ],
+      sampleImg: [
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon1.webp",
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon2.webp",
+      ],
     },
   },
   {
@@ -105,6 +121,10 @@ export const staticData: IstaticData[] = [
           placeholder: "notion",
           link: "",
         },
+      ],
+      sampleImg: [
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon1.webp",
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon2.webp",
       ],
     },
   },
