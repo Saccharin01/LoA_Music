@@ -8,7 +8,7 @@ export default function MainPage() {
       <header className="mb-6 pt-6">
         <div className="max-w-4xl">
           <h1 className="text-4xl font-bold">
-            반갑습니다. 요리하다가 개발하게 된 조우식입니다.
+          요리하다가 개발하게 된 조우식입니다.
           </h1>
         </div>
       </header>
