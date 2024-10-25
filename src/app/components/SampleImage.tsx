@@ -32,7 +32,7 @@ export default function SampleImage({ sampleImages }: SampleImageProps) {
       <h1 className="text-3xl font-bold my-20">Sample Image</h1>
 
       {/* 반응형 및 그리드 배치 */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 my-4 justify-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pb-10 justify-items-center">
         {sampleImages.map((element, index) => (
           <div key={index} onClick={() => openModal(element)} className="cursor-pointer">
             <Image
