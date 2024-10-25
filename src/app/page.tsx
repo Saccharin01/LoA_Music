@@ -12,10 +12,10 @@ export default function MainPage() {
           </h1>
         </div>
       </header>
-      <main className="flex-grow ">
+      <main>
         <StackElement />
       </main>
-      <footer className="mt-10">
+      <footer className="mt-10 pb-5">
         <ProjectElement />
       </footer>
     </>
