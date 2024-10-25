@@ -57,8 +57,9 @@ export const staticData: IstaticData[] = [
         },
       ],
       sampleImg: [
-        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon1.webp",
-        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/hackathon/hackathon2.webp",
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/LoA_Music/LoA_Music_sample_1.webp",
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/LoA_Music/LoA_Music_sample_2.webp",
+        "https://saccharinportfolio.s3.ap-northeast-2.amazonaws.com/LoA_Music/LoA_Music_sample_3.webp",
       ],
     },
   },
