@@ -6,8 +6,8 @@ import "./music.css";
 
 export const metadata: Metadata = {
   title: "LoA Music",
-  description: "Losk Ark Theme music",
-  keywords: ["LoA Music", "Losk Ark", "Losk Ark OST"],
+  description: "Lost Ark Theme music",
+  keywords: ["LoA Music", "Lost Ark", "Lost Ark OST"],
 };
 
 export default function RootLayout({
@@ -16,19 +16,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html>
+    <html lang="en">
       <meta name="robots" content="index, follow" />
-      <body>
-        <div className="bg-[#282c2c]">
-          <DataProvider>
-            <DragDropProvider>
-              <header className="absolute w-full top-0 left-0 z-[1] h-16">
-                <Navbar />
-              </header>
-              <div className="mt-16 w-[99vw] h-[95vh]">{children}</div>
-            </DragDropProvider>
-          </DataProvider>
-        </div>
+      <body className="bg-[#282c2c]">
+        <DataProvider>
+          <DragDropProvider>
+            <header className="absolute w-full top-0 left-0 z-[1] h-16">
+              <Navbar />
+            </header>
+            <main className="mt-4 w-full min-h-[95vh] px-4 sm:px-8 md:px-12">
+              {children}
+            </main>
+          </DragDropProvider>
+        </DataProvider>
       </body>
     </html>
   );
