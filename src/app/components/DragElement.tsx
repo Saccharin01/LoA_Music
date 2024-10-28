@@ -3,7 +3,8 @@ import React, { useMemo, useCallback } from "react";
 import { useData } from "./context/useData";
 import ImageItem from "./memo/useMemo.Image";
 import { IMusicDataFormat } from "@/shared/IDataFormat";
-import mime from "mime"
+import mime from "mime";
+
 export default function DragElement() {
   const { data, loading } = useData();
 
@@ -29,12 +30,15 @@ export default function DragElement() {
 
   if (!loading) {
     return (
-    <div className="w-full h-full overflow-x-hidden hide-scrollbar">
-      <div className="grid grid-cols-5 gap-2 place-items-center overflow-auto bg-[#9e9e9e] bg-opacity-20">
-        {imageList}
+      <div className="w-full h-full overflow-hidden">
+        <div
+          className="grid gap-2 place-items-center bg-[#9e9e9e] bg-opacity-20 
+                     grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 
+                     hide-scrollbar overflow-hidden"
+        >
+          {imageList}
+        </div>
       </div>
-    </div>
-    )
+    );
   }
-
 }
