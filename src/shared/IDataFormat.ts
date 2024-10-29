@@ -18,6 +18,7 @@ export interface IMusicDataFormatServer extends IMusicDataFormat, Document {
 export interface IRequestDataFormat {
   id: string;
   requestLog: string;
+  requestParams : string
   date: string;
 }
 
