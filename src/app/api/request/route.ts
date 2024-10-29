@@ -1,23 +1,31 @@
 export const dynamic = "force-dynamic";
 
 import { NextResponse } from "next/server";
-import { InitalizeServerENV, LogMailEvent, fetchLastEmailEvent } from "../modules/InitalizeServerENV";
+import { InitalizeServerENV } from "../modules/InitalizeServerENV";
 import connectDB from "../modules/ConnectDB";
 import { RequestLog, MailTimestemp } from "../model/mongooseModel";
 import { IRequestDataFormat } from "@/shared/IDataFormat";
 import { getDate, numberdId, validateRequestData } from "../modules/RequestFormat";
-import MailNotification from "../modules/MailNotification";
+import { MailVerification } from "../modules/MailVerification"
+
+// ? N회 이상 일 때 메일이 전송되는 쓰레스홀드입니다.
+//* MailVerification함수에서 두 번째 매개변수로 요구되는 값이며 미 지정시 10으로 기본 값이 설정되어 있습니다.
 
 const REQUEST_THRESHOLD = 10;
 
-// 서버 초기화 시 이니셜라이즈 함수 실행
+/**
+ * ! 서버의 환경을 초기화하는 함수입니다.
+ * route.ts 파일을 통해 라우팅 POST API 요청이 트리거 되면 해당 함수가 가장 먼저 실행되어 서버의 환경을 초기화 합니다.
+ * 사용자의 경험을 위해 논블럭 비동기 처리가 되어있습니다.
+ */
+
 InitalizeServerENV(RequestLog, MailTimestemp);
 
 export async function POST(request: Request) {
   console.log(globalThis.cache);
   console.log(globalThis.Memo);
   try {
-    await connectDB(); // 각 요청마다 데이터베이스 연결 상태 확인
+    await connectDB(); // 각 요청마다 데이터베이스 연결 상태 확인 연결이 되어있으면 패스쓰루, 연결이 안 되어있으면 연결을 진행합니다.
 
     const body: IRequestDataFormat = await request.json();
     validateRequestData(body.requestLog); // 요청 데이터 검증
@@ -33,14 +41,14 @@ export async function POST(request: Request) {
 
     await newRequestLog.save();
 
-    // 클라이언트에 즉시 응답 반환
+    // 정상적으로 요청이 전송되었다면 메일 전송 로직을 기다리지 않고 사용자에게 응답을 반환합니다.
     const response = NextResponse.json(
       { message: "Data saved successfully", data: newRequestLog },
       { status: 201 }
     );
 
-    // 메일 검증 및 전송은 비동기적으로 처리
-    processMailVerification(newId);
+    // 메일 검증 및 전송은 비동기적으로 처
+    MailVerification(newId , REQUEST_THRESHOLD);
 
     // 응답을 즉시 반환하고 이후 작업을 비동기 처리
     return response;
@@ -55,57 +63,5 @@ export async function POST(request: Request) {
       },
       { status: 500 }
     );
-  }
-}
-
-// 비동기적으로 메일 검증 및 전송을 수행하는 함수
-async function processMailVerification(newId: string) {
-  try {
-    const numericCurrentId = parseInt(newId.split(".")[1], 10);
-    const idDifference = numericCurrentId - globalThis.Memo;
-
-    if (idDifference >= REQUEST_THRESHOLD) {
-      const emailType = "request_threshold_exceeded";
-      const currentDate = new Date();
-      const currentDay = currentDate.toISOString().split('T')[0]; // YYYY-MM-DD 형식으로 날짜 가져오기
-
-      const cachedData = globalThis.cache.get("lastEmailEvent");
-
-      // 캐시에 저장된 날짜의 일(day) 값이 같으면 메일을 전송하지 않음
-      if (cachedData && cachedData.sentTime.toISOString().split('T')[0] === currentDay) {
-        console.log(`오늘 이미 메일이 전송되었으므로 메일 전송이 생략되었습니다.`);
-      } else {
-        const lastEmailEvent = await fetchLastEmailEvent(MailTimestemp);
-        const lastEventDay = lastEmailEvent ? lastEmailEvent.sentTime.toISOString().split('T')[0] : null;
-
-        // 데이터베이스에 기록된 마지막 메일 전송 일자가 오늘과 같으면 메일 전송 생략
-        if (lastEventDay === currentDay) {
-          console.log(`데이터베이스 기록에 따라 오늘은 이미 메일이 전송되었습니다.`);
-        } else {
-          // 메일 전송 로직 실행
-          await MailNotification(idDifference);
-
-          // 캐시 갱신
-          globalThis.cache.set("lastEmailEvent", { id: "uniqueId", sentTime: new Date(), status: "sent" });
-
-          const MailLogID = await MailTimestemp.findOne().sort({ id: -1 }).exec();
-          await LogMailEvent(
-            {
-              id: numberdId(MailLogID),
-              sentTime: new Date(),
-              status: "sent",
-            },
-            MailTimestemp
-          );
-
-          console.log("메일 전송 및 로그 기록 완료");
-        }
-      }
-
-      // 최신 Memo 업데이트
-      globalThis.Memo = numericCurrentId;
-    }
-  } catch (error) {
-    console.error("Error processing mail verification:", error);
   }
 }
