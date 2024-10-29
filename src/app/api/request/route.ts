@@ -36,6 +36,7 @@ export async function POST(request: Request) {
     const newRequestLog = new RequestLog({
       id: newId,
       requestLog: body.requestLog,
+      requestParams: body.requestParams,
       date: getDate(new Date()),
     });
 
