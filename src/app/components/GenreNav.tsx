@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useData } from "./context/useData";
+import { useData } from "./hooks/context/useData";
 
 const genres = ["commander", "adventure", "orb", "island", "abyss"];
 

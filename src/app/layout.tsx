@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { DataProvider } from "./components/context/useData";
-import { DragDropProvider } from "./components/context/useDragDrop";
+import { DataProvider } from "./components/hooks/context/useData";
+import { DragDropProvider } from "./components/hooks/context/useDragDrop";
 import Navbar from "./components/Navbar";
 import "./music.css";
 

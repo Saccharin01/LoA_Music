@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useDragDrop } from "./context/useDragDrop";
+import { useDragDrop } from "./hooks/context/useDragDrop";
 
 export default function DropBox() {
   const { droppedItem, setDroppedItem } = useDragDrop(); 
