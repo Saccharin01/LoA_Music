@@ -1,6 +1,6 @@
 import React from "react";
 import Image from "next/image";
-import { ImageItemProps } from "../../../shared/interface/useMemo.interface";
+import { ImageItemProps } from "../../../../shared/interface/useMemo.interface";
 
 const ImageItem: React.FC<ImageItemProps> = ({ element, handleDragStart }) => {
   return (
