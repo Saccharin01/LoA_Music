@@ -13,10 +13,10 @@ const ImageItem: React.FC<ImageItemProps> = ({ element, handleDragStart }) => {
         src={element.img}
         alt={element._id}
         className="object-cover w-full h-full" // 부모 요소에 맞게 가득 채우기
-        layout="responsive" // 반응형 레이아웃
         width={300}
         height={200}
-        sizes="(max-width: 600px) 100vw, (max-width: 768px) 50vw, 25vw" // 뷰포트에 따라 크기 조정
+        sizes="(max-width: 600px) 100vw, (max-width: 768px) 50vw, 25vw"
+        priority // 뷰포트에 따라 크기 조정
       />
     </div>
   );
