@@ -24,9 +24,9 @@ export default function RootLayout({
             <header className="absolute w-full top-0 left-0 z-[1] h-16">
               <Navbar />
             </header>
-            <main className="mt-4 w-full min-h-[95vh] px-4 sm:px-8 md:px-12">
+            <div className="mt-20">
               {children}
-            </main>
+            </div>
           </DragDropProvider>
         </DataProvider>
       </body>
