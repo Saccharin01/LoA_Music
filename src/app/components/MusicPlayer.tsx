@@ -30,7 +30,7 @@ const MusicPlayer: React.FC = () => {
   }, [droppedItem, setIsPlaying, audioRef]);
 
   return (
-    <div className="flex flex-col h-4/5 min-h-full  w-full justify-between bg-[#9e9e9e] bg-opacity-40 p-5 rounded-lg shadow-lg">
+    <div className="flex flex-col w-full justify-between bg-[#9e9e9e] bg-opacity-40 p-5 rounded-lg shadow-lg">
       <div className="w-[200px] h-[200px] mx-auto my-5 bg-center bg-cover rounded-full shadow-md transition-transform duration-500 ease-linear">
         <Image
           src="https://lomusic2.s3.ap-northeast-2.amazonaws.com/LPImage2.webp"
