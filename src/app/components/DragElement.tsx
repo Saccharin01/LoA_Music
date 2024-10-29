@@ -33,38 +33,39 @@ export default function DragElement({ footerRef }: DragElementProps) {
   }, [footerRef]);
 
   useEffect(() => {
-    const footerElement = footerRef.current;
-    if (footerElement) {
-      footerElement.addEventListener("scroll", handleScroll);
-    }
-    return () => {
+    if (!loading) {
+      const footerElement = footerRef.current;
       if (footerElement) {
-        footerElement.removeEventListener("scroll", handleScroll);
+        footerElement.addEventListener("scroll", handleScroll);
       }
-    };
-  }, [handleScroll, footerRef]);
+      return () => {
+        if (footerElement) {
+          footerElement.removeEventListener("scroll", handleScroll);
+        }
+      };
+    }
+  }, [handleScroll, footerRef, loading]);
 
-  const imageList = useMemo(
-    () =>
-      data.slice(0, visibleCount).map((element, index) => (
-        <ImageItem
-          key={index}
-          element={element}
-          handleDragStart={handleDragStart}
-        />
-      )),
-    [data, visibleCount, handleDragStart]
-  );
+  const imageList = useMemo(() => {
+    if (loading) return null;
+    return data.slice(0, visibleCount).map((element, index) => (
+      <ImageItem
+        key={index}
+        element={element}
+        handleDragStart={handleDragStart}
+      />
+    ));
+  }, [data, visibleCount, handleDragStart, loading]);
 
-  if (!loading) {
-    return (
-      <div
-        className="grid gap-2 place-items-center bg-[#9e9e9e] bg-opacity-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 hide-scrollbar"
-      >
-        {imageList}
-      </div>
-    );
+  if (loading) {
+    return null; // 로딩 중일 때는 빈 화면을 반환
   }
 
-  return null; // 로딩 중일 때는 빈 화면을 반환
+  return (
+    <div
+      className="grid gap-2 place-items-center bg-[#9e9e9e] bg-opacity-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 hide-scrollbar"
+    >
+      {imageList}
+    </div>
+  );
 }
