@@ -1,13 +1,18 @@
 "use client";
+
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useData } from "./hooks/context/useData";
 import ImageItem from "./hooks/memo/useMemo.Image";
 import { IMusicDataFormat } from "@/shared/IDataFormat";
 import mime from "mime";
 
-export default function DragElement() {
+interface DragElementProps {
+  footerRef: React.RefObject<HTMLDivElement>;
+}
+
+export default function DragElement({ footerRef }: DragElementProps) {
   const { data, loading } = useData();
-  const [visibleCount, setVisibleCount] = useState(20); // 표시할 데이터 개수
+  const [visibleCount, setVisibleCount] = useState(10); // 표시할 데이터 개수
 
   const handleDragStart = useCallback(
     (event: React.DragEvent<HTMLDivElement>, item: IMusicDataFormat) => {
@@ -17,21 +22,28 @@ export default function DragElement() {
     []
   );
 
-  // 스크롤 이벤트 핸들러: 하단 근접 시 더 많은 항목을 로드
+  // footer 내 스크롤 이벤트 핸들러
   const handleScroll = useCallback(() => {
-    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) {
-      setVisibleCount((prevCount) => prevCount + 20); // 20개씩 추가 로드
+    if (footerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = footerRef.current;
+      if (scrollHeight - scrollTop <= clientHeight + 50) {
+        setVisibleCount((prevCount) => prevCount + 10); // 20개씩 추가 로드
+      }
     }
-  }, []);
+  }, [footerRef]);
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
+    const footerElement = footerRef.current;
+    if (footerElement) {
+      footerElement.addEventListener("scroll", handleScroll);
+    }
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      if (footerElement) {
+        footerElement.removeEventListener("scroll", handleScroll);
+      }
     };
-  }, [handleScroll]);
+  }, [handleScroll, footerRef]);
 
-  // 초기 20개만 보여주고 추가 로딩
   const imageList = useMemo(
     () =>
       data.slice(0, visibleCount).map((element, index) => (
@@ -46,12 +58,10 @@ export default function DragElement() {
 
   if (!loading) {
     return (
-      <div className="w-full h-full overflow-hidden">
-        <div
-          className="grid gap-2 place-items-center bg-[#9e9e9e] bg-opacity-20 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 hide-scrollbar overflow-hidden"
-        >
-          {imageList}
-        </div>
+      <div
+        className="grid gap-2 place-items-center bg-[#9e9e9e] bg-opacity-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 hide-scrollbar"
+      >
+        {imageList}
       </div>
     );
   }
