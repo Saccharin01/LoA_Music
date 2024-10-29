@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useState, useContext, ReactNode } from "react";
 import { IMusicDataFormat } from "@/shared/IDataFormat";
-import { DragDropContextType } from "../interface/useDragDrop.interface"
+import { DragDropContextType } from "../../../../shared/interface/useDragDrop.interface"
 
 const DragDropContext = createContext<DragDropContextType | undefined>(undefined);
 

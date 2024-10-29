@@ -19,6 +19,7 @@ const musicSchema: Schema<IMusicDataFormatServer> = new Schema({
 const requestSchema: Schema<IRequestDataFormatServer> = new Schema({
   id: String,
   requestLog: String,
+  requestParams: String,
   date: String,
 });
 

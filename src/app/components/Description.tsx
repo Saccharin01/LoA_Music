@@ -1,6 +1,6 @@
 "use client";
 
-import { useDragDrop } from "./context/useDragDrop";
+import { useDragDrop } from "./hooks/context/useDragDrop";
 import GenreNav from "./GenreNav";
 
 export default function MusicDescription() {

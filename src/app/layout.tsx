@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import { DataProvider } from "./components/hooks/context/useData";
+import { DragDropProvider } from "./components/hooks/context/useDragDrop";
+import Navbar from "./components/Navbar";
+import "./music.css";
 
 export const metadata: Metadata = {
-  title: "조우식",
-  description: "조우식의 페이지 입니다.",
-  keywords: ["조우식", "개발자", "웹 개발", "프로그래밍", "포트폴리오", "saccharin01"]
+  title: "LoA Music",
+  description: "Lost Ark Theme music",
+  keywords: ["LoA Music", "Lost Ark", "Lost Ark OST"],
 };
-
 
 export default function RootLayout({
   children,
@@ -14,14 +16,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <head>
-        <meta name="robots" content="index, follow" /> 
-      </head>
-      <body>
-        <div>
-          {children}
-        </div>
+    <html lang="en">
+      <meta name="robots" content="index, follow" />
+      <body className="bg-[#282c2c]">
+        <DataProvider>
+          <DragDropProvider>
+            <header className="absolute w-full top-0 left-0 z-[1] h-16">
+              <Navbar />
+            </header>
+            <div className="mt-20">
+              {children}
+            </div>
+          </DragDropProvider>
+        </DataProvider>
       </body>
     </html>
   );
