@@ -1,126 +1,46 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
-import { useDragDrop } from "./context/useDragDrop";
+import React from "react";
+import { useDragDrop } from "./hooks/context/useDragDrop";
 import Image from "next/image";
+import { usePlayerState } from "./hooks/usePlayerState";
+
 const MusicPlayer: React.FC = () => {
-  const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [currentTime, setCurrentTime] = useState<number>(0);
-  const [duration, setDuration] = useState<number>(0);
-  const [volume, setVolume] = useState<number>(20);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const progressBarRef = useRef<HTMLDivElement | null>(null);
-  const volumeBarRef = useRef<HTMLInputElement | null>(null);
+  const {
+    isPlaying,
+    currentTime,
+    duration,
+    volume,
+    audioRef,
+    progressBarRef,
+    handlePlayPause,
+    handleVolumeChange,
+    startProgressDrag,
+    setIsPlaying,
+  } = usePlayerState(20);
+
   const { droppedItem } = useDragDrop();
 
-  useEffect(() => {
-    const audioElement = audioRef.current;
-    if (audioElement) {
-      audioElement.volume = volume / 100;
-      const updateTime = () => {
-        setCurrentTime(audioElement.currentTime);
-        setDuration(audioElement.duration);
-      };
-
-      audioElement.addEventListener("timeupdate", updateTime);
-      audioElement.addEventListener("loadedmetadata", updateTime);
-
-      return () => {
-        audioElement.removeEventListener("timeupdate", updateTime);
-        audioElement.removeEventListener("loadedmetadata", updateTime);
-      };
-    }
-  }, [volume]);
-
-  useEffect(() => {
+  React.useEffect(() => {
     setIsPlaying(false);
     const audioElement = audioRef.current;
     if (audioElement) {
       audioElement.pause();
       audioElement.currentTime = 0;
     }
-  }, [droppedItem]);
-
-  const handlePlayPause = () => {
-    const audioElement = audioRef.current;
-    if (audioElement) {
-      if (isPlaying) {
-        audioElement.pause();
-      } else {
-        audioElement.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
-  const handleProgressDrag = (event: React.MouseEvent | MouseEvent) => {
-    if (progressBarRef.current) {
-      const rect = progressBarRef.current.getBoundingClientRect();
-      const newLeft = Math.max(0, Math.min(event.clientX - rect.left, rect.width));
-      const newProgress = (newLeft / rect.width) * duration;
-
-      if (audioRef.current) {
-        audioRef.current.currentTime = newProgress;
-        setCurrentTime(newProgress);
-      }
-    }
-  };
-
-  const startProgressDrag = (event: React.MouseEvent) => {
-    handleProgressDrag(event);
-
-    const mouseMoveHandler = (event: MouseEvent) => {
-      handleProgressDrag(event);
-    };
-
-    document.addEventListener("mousemove", mouseMoveHandler);
-    document.addEventListener("mouseup", () => {
-      document.removeEventListener("mousemove", mouseMoveHandler);
-    });
-  };
-
-  const handleVolumeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newVolume = parseFloat(event.target.value);
-    setVolume(newVolume);
-    if (audioRef.current) {
-      audioRef.current.volume = newVolume / 100;
-    }
-  };
-
-  const startDragButton = (event: React.MouseEvent) => {
-    event.preventDefault();
-    const mouseMoveHandler = (event: MouseEvent) => {
-      if (progressBarRef.current) {
-        const rect = progressBarRef.current.getBoundingClientRect();
-        const newLeft = Math.max(0, Math.min(event.clientX - rect.left, rect.width));
-        const newProgress = (newLeft / rect.width) * duration;
-
-        if (audioRef.current) {
-          audioRef.current.currentTime = newProgress;
-          setCurrentTime(newProgress);
-        }
-      }
-    };
-
-    document.addEventListener("mousemove", mouseMoveHandler);
-    document.addEventListener("mouseup", () => {
-      document.removeEventListener("mousemove", mouseMoveHandler);
-    });
-  };
+  }, [droppedItem, setIsPlaying, audioRef]);
 
   return (
-    <div className="flex flex-col h-4/5 min-h-[95%]  w-[70%] justify-between bg-[#9e9e9e] bg-opacity-40 p-5 rounded-lg shadow-lg m-5">
-      {/* Album Image Section */}
+    <div className="flex flex-col w-full justify-between bg-[#9e9e9e] bg-opacity-40 p-5 rounded-lg shadow-lg">
       <div className="w-[200px] h-[200px] mx-auto my-5 bg-center bg-cover rounded-full shadow-md transition-transform duration-500 ease-linear">
         <Image
-        src="https://lomusic2.s3.ap-northeast-2.amazonaws.com/LPImage2.webp"
-        alt="LP image"
-        width={200}
-        height={200}
-        className="w-full h-full object-cover rounded-full"
+          src="https://lomusic2.s3.ap-northeast-2.amazonaws.com/LPImage2.webp"
+          alt="LP image"
+          width={200}
+          height={200}
+          className="w-full h-full object-cover rounded-full"
         />
       </div>
 
-      {/* Track Info Section */}
       <div className="text-center my-4">
         <h3 className="font-bold text-lg text-black">
           {droppedItem ? droppedItem._id : "재생중인 음악 없음!"}
@@ -138,10 +58,8 @@ const MusicPlayer: React.FC = () => {
         </p>
       </div>
 
-      {/* Audio Player */}
       <audio ref={audioRef} src={droppedItem?.src}></audio>
 
-      {/* Progress Bar Section */}
       <div className="mt-2 px-4" ref={progressBarRef} onMouseDown={startProgressDrag}>
         <div className="w-full h-[10px] bg-gray-300 rounded-lg relative overflow-hidden cursor-pointer">
           <div
@@ -149,22 +67,19 @@ const MusicPlayer: React.FC = () => {
             style={{ width: `${(currentTime / duration) * 100}%` }}
           ></div>
 
-          {/* Draggable Button */}
           <div
             className="w-4 h-4 bg-white border border-gray-400 rounded-full absolute top-1/2 transform -translate-y-1/2 cursor-pointer transition-transform duration-300"
             style={{ left: `${(currentTime / duration) * 100}%` }}
-            onMouseDown={startDragButton}
+            onMouseDown={startProgressDrag}
           ></div>
         </div>
       </div>
 
-      {/* Volume and Control Section */}
       <div className="mt-4 flex justify-between items-center">
         <div className="flex flex-col items-center w-1/2">
           <input
             type="range"
             className="w-full h-[5px] bg-gray-300 rounded-lg appearance-none cursor-pointer"
-            ref={volumeBarRef}
             value={volume}
             max="100"
             onChange={handleVolumeChange}

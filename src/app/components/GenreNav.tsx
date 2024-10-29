@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { useData } from "./context/useData";
+import { useData } from "./hooks/context/useData";
 
 const genres = ["commander", "adventure", "orb", "island", "abyss"];
 
@@ -26,14 +26,14 @@ const GenreNav: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center mt-4">
-      <nav className="flex space-x-4">
+    <div className="flex justify-center mt-4 px-2">
+      <nav className="flex flex-wrap gap-2 sm:gap-4 justify-center">
         {genres.map((genre, index) => (
           <button
             key={index}
             value={genre}
             onClick={() => fetchGenreData(genre)}
-            className="px-4 py-2 border border-black rounded-md bg-white hover:bg-gray-200 cursor-pointer shadow-md transition-all"
+            className="px-3 py-2 sm:px-4 sm:py-2 border border-black rounded-md bg-white hover:bg-gray-200 cursor-pointer shadow-md transition-all text-sm sm:text-base"
           >
             {genre}
           </button>

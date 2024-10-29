@@ -14,7 +14,7 @@ export default function Navbar() {
           <div className="flex justify-between h-16 px-10 shadow items-cente">
             <div className="flex items-center space-x-1">
               <div>
-                <Link href="/music" className="">
+                <Link href="/" className="">
                   <h1 className="text-xl lg:text-2xl font-bold cursor-pointer mr-10 border-cyan-300 text-slate-200 ">
                     LoA Music
                   </h1>
@@ -28,22 +28,16 @@ export default function Navbar() {
                   Home
                 </Link> */}
                 <Link
-                  href="/music/player"
+                  href="/player"
                   className="hover:text-yellow-500 text-slate-200 font-bold"
                 >
                   player
                 </Link> 
                 <Link
-                  href="/music/request"
+                  href="/request"
                   className="hover:text-yellow-500 text-slate-200 font-bold"
                 >
                   Request
-                </Link>
-                <Link
-                  href="/music/about"
-                  className="hover:text-yellow-500 text-slate-200 font-bold"
-                >
-                  About
                 </Link>
               </div>
             </div>

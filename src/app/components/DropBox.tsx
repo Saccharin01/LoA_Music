@@ -1,23 +1,24 @@
 "use client";
 
 import { useEffect } from "react";
-import { useDragDrop } from "./context/useDragDrop";
+import { useDragDrop } from "./hooks/context/useDragDrop";
+import Image from "next/image";
 
 export default function DropBox() {
-  const { droppedItem, setDroppedItem } = useDragDrop(); 
+  const { droppedItem, setDroppedItem } = useDragDrop();
 
   useEffect(() => {
     if (droppedItem) {
-      console.log("Dropped Item:", droppedItem); 
+      console.log("Dropped Item:", droppedItem);
     }
-  }, [droppedItem]); 
+  }, [droppedItem]);
 
   useEffect(() => {
     setDroppedItem(null);
   }, [setDroppedItem]);
-  
+
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault(); 
+    event.preventDefault();
   };
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
@@ -31,15 +32,18 @@ export default function DropBox() {
 
   return (
     <div
-      className="flex justify-center items-center border-4 border-dashed w-5/6 h-2/3 rounded-2xl text-slate-200"
-      onDrop={handleDrop} 
-      onDragOver={handleDragOver} 
+      className="flex justify-center items-center border-2 border-dashed w-5/6 h-2/3 min-w-[300px] min-h-[200px] rounded-2xl text-slate-200 mt-2"
+      onDrop={handleDrop}
+      onDragOver={handleDragOver}
     >
       {droppedItem?.img ? (
-        <img
+        <Image
           src={droppedItem.img}
           alt={droppedItem._id}
-          className="max-w-full max-h-full object-contain rounded-lg"
+          className="object-cover rounded-lg"
+          width={300}
+          height={200}
+          loading="lazy"
         />
       ) : (
         "Drop Here!"

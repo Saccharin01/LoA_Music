@@ -1,6 +1,5 @@
 "use client";
-import Link from "next/link";
-import AboutPage from "../../components/AboutPage";
+import AboutPage from "../components/AboutPage";
 import { useState } from "react";
 import updateLink from "@/shared/link";
 
