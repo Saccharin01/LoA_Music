@@ -2,6 +2,7 @@
 
 import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useData } from "./hooks/context/useData";
+import { useDragDrop } from "./hooks/context/useDragDrop";
 import ImageItem from "./hooks/memo/useMemo.Image";
 import { IMusicDataFormat } from "@/shared/IDataFormat";
 import mime from "mime";
@@ -12,23 +13,47 @@ interface DragElementProps {
 
 export default function DragElement({ footerRef }: DragElementProps) {
   const { data, loading } = useData();
+  const { setDroppedItem } = useDragDrop();
+  const [visibleCount, setVisibleCount] = useState(15);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // * 페이징 관련 상태 값. 10개씩 불러오고 footerRef 매개변수를 통해 전달되는 props를 이용해 관측합니다.
-  const [visibleCount, setVisibleCount] = useState(10);
+  // 뷰포트 너비를 감지하여 모바일 환경 여부 설정
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768); // 모바일 환경 기준 뷰포트 너비 설정
+    };
 
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // 드래그 이벤트 핸들러 - 데스크탑 환경에서만 동작
   const handleDragStart = useCallback(
     (event: React.DragEvent<HTMLDivElement>, item: IMusicDataFormat) => {
-      if (event.target instanceof HTMLImageElement)
+      if (!isMobile && event.target instanceof HTMLImageElement) {
         event.dataTransfer.setData(mime.getType("json")!, JSON.stringify(item));
+      }
     },
-    []
+    [isMobile]
+  );
+
+  // 모바일 환경에서의 클릭 이벤트 핸들러
+  const handleClick = useCallback(
+    (item: IMusicDataFormat) => {
+      if (isMobile) {
+        setDroppedItem(item); // 클릭 시 데이터를 설정
+      }
+    },
+    [isMobile, setDroppedItem]
   );
 
   const handleScroll = useCallback(() => {
     if (footerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = footerRef.current;
       if (scrollHeight - scrollTop <= clientHeight + 50) {
-        setVisibleCount((prevCount) => prevCount + 10); // 20개씩 추가 로드
+        setVisibleCount((prevCount) => prevCount + 10); // 10개씩 추가 로드
       }
     }
   }, [footerRef]);
@@ -47,20 +72,18 @@ export default function DragElement({ footerRef }: DragElementProps) {
     }
   }, [handleScroll, footerRef, loading]);
 
-  /**
-   * * 각 이미지가 리랜더링 되는 부분을 방지하기 위한 Memo 함수입니다
-   * * 의존성 배열로 정의되어있는 data, VisibleCount 등의 값이 변경되지 않는 한 리랜더링을 진행하지 않습니다
-   */
+  // 이미지 목록 렌더링을 위한 useMemo
   const imageList = useMemo(() => {
     if (loading) return null;
     return data.slice(0, visibleCount).map((element, index) => (
       <ImageItem
         key={index}
         element={element}
-        handleDragStart={handleDragStart}
+        handleDragStart={(e) => handleDragStart(e, element)}
+        onClick={() => handleClick(element)} // 모바일 환경에서 클릭 이벤트 설정
       />
     ));
-  }, [data, visibleCount, handleDragStart, loading]);
+  }, [data, visibleCount, handleDragStart, handleClick, loading]);
 
   if (loading) {
     return null;
