@@ -2,12 +2,13 @@ import React from "react";
 import Image from "next/image";
 import { ImageItemProps } from "@/shared/interface/useMemo.interface";
 
-const ImageItem: React.FC<ImageItemProps> = ({ element, handleDragStart }) => {
+const ImageItem: React.FC<ImageItemProps> = ({ element, handleDragStart, onClick }) => {
   return (
     <div
       className="flex justify-center items-center cursor-pointer w-full max-w-full h-auto rounded-md overflow-hidden transition-transform duration-200 hover:scale-105"
       draggable
       onDragStart={(event) => handleDragStart(event, element)}
+      onClick={onClick} // onClick 이벤트 추가
     >
       <Image
         src={element.img}

@@ -40,7 +40,7 @@ export default function DropBox() {
         <Image
           src={droppedItem.img}
           alt={droppedItem._id}
-          className="w-full h-full" // 부모의 크기에 맞춰 가득 채우도록 설정
+          className="w-auto h-auto" // 부모의 크기에 맞춰 가득 채우도록 설정
           width={300}
           height={200}
           loading="lazy"
