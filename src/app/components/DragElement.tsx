@@ -91,7 +91,7 @@ export default function DragElement({ footerRef }: DragElementProps) {
 
   return (
     <div
-      className="grid gap-2 place-items-center bg-[#9e9e9e] bg-opacity-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 hide-scrollbar"
+      className="mb-6 grid gap-2 place-items-center bg-[#9e9e9e] bg-opacity-20 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 hide-scrollbar"
     >
       {imageList}
     </div>
