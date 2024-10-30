@@ -26,7 +26,7 @@ const GenreNav: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center mt-4 px-2">
+    <div className="flex justify-center px-2">
       <nav className="flex flex-wrap gap-2 sm:gap-4 justify-center">
         {genres.map((genre, index) => (
           <button
