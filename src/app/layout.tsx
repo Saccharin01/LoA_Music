@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <meta name="robots" content="index, follow" />
       <body className="bg-[#282c2c]">
         <DataProvider>
