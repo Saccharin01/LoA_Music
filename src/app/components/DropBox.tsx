@@ -32,7 +32,7 @@ export default function DropBox() {
 
   return (
     <div
-      className="flex justify-center items-center border-2 border-dashed w-5/6 h-2/3 min-w-[300px] min-h-[200px] rounded-2xl text-slate-200 mt-2"
+      className="flex justify-center items-center border-2 border-dashed w-5/6 h-2/3 min-w-[300px] min-h-[200px] max-w-full max-h-full rounded-2xl text-slate-200 mt-2 overflow-hidden" // max-width와 max-height로 부모 크기 제한
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
@@ -40,7 +40,7 @@ export default function DropBox() {
         <Image
           src={droppedItem.img}
           alt={droppedItem._id}
-          className="object-cover rounded-lg"
+          className="w-auto h-auto" // 부모의 크기에 맞춰 가득 채우도록 설정
           width={300}
           height={200}
           loading="lazy"
