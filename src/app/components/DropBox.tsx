@@ -32,7 +32,7 @@ export default function DropBox() {
 
   return (
     <div
-      className="flex justify-center items-center border-2 border-dashed w-5/6 h-2/3 min-w-[300px] min-h-[200px] max-w-full max-h-full rounded-2xl text-slate-200 mt-2 overflow-hidden" // max-width와 max-height로 부모 크기 제한
+      className="flex justify-center items-center border-2 border-dashed w-5/6 h-2/3 min-w-[300px] min-h-[200px] max-w-full max-h-full rounded-2xl text-slate-200 mt-2 overflow-hidden text-lg" // max-width와 max-height로 부모 크기 제한
       onDrop={handleDrop}
       onDragOver={handleDragOver}
     >
@@ -46,7 +46,7 @@ export default function DropBox() {
           loading="lazy"
         />
       ) : (
-        "Drop Here!"
+        "이 곳에 아래의 노래를 드랍해주세요!"
       )}
     </div>
   );
